@@ -1,7 +1,8 @@
 <!-- TORS Sales Order Email Template (NetSuite FreeMarker). Record Type: Transaction. Paste into the template's HTML source. Wide layout: card fills 80% of the window, 10% gray border each side. -->
-<#-- Order link: read it off the sales order first (custbody_tors_order_link, sourced from the customer), then fall back to the customer record. The customer object is often empty when emailing from a transaction. -->
-<#assign orderLink = (transaction.custbody_tors_order_link)!"">
-<#if !orderLink?has_content><#assign orderLink = (customer.custentity_tors_order_link)!""></#if>
+<#-- Order link: try the customer record first, then the sales order's customer (entity). Each try is wrapped so a missing field never breaks the email. -->
+<#assign orderLink = "">
+<#attempt><#assign orderLink = (customer.custentity_tors_order_link)!""><#recover></#attempt>
+<#if !orderLink?has_content><#attempt><#assign orderLink = (transaction.entity.custentity_tors_order_link)!""><#recover></#attempt></#if>
 <div style="display: none; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #f4f6f8;">Your order is in. Check its status any time with your Order Status Update link.</div>
 <table style="background-color: #f4f6f8;" role="presentation" border="0" width="100%" cellspacing="0" cellpadding="0">
 <tbody>
