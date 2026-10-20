@@ -148,8 +148,9 @@ One `ns_updateRecord` call on `purchaseorder` `<netsuite_update.po_id>`:
 ```
 
 Only include `custbody23` if it's in `netsuite_update.body`. Leave `item` out if
-`line_updates` is empty. Then re-run the step 5 query and confirm the box and
-every date landed. If the update errors or didn't stick, send purchasing an
+`line_updates` is empty. Then re-run the step 5 query and confirm `custbody23`
+and every line date landed. (`custbody20` Expected Ship Date doesn't come back
+through the API on this account, so don't count it as a failure if you can't read it.) If the update errors or didn't stick, send purchasing an
 email: "PO X checked out but I couldn't update NetSuite: <error>. Please set it by hand."
 
 ## 8. Email purchasing
