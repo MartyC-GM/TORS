@@ -1,0 +1,22 @@
+{
+  "po": {
+    "id": 14699851, "tranid": "35248", "vendor_id": 21, "vendor_name": "VN01 Seal and Rubber Technologies",
+    "ship_method": "FedEx Ground®", "ship_dates_confirmed": false,
+    "lines": [
+      {"line": 1, "item": "V75014", "qty": 20000, "rate": 0.0194, "expected_receipt_date": "10/26/2026"},
+      {"line": 2, "item": "B70023", "qty": 6000,  "rate": 0.0081, "expected_receipt_date": "10/26/2026"},
+      {"line": 3, "item": "B70027", "qty": 5000,  "rate": 0.01,   "expected_receipt_date": "10/26/2026"},
+      {"line": 4, "item": "B70041", "qty": 2000,  "rate": 0.0336, "expected_receipt_date": "10/26/2026"}
+    ]
+  },
+  "confirmation": {
+    "po_number": "35248", "email_subject": "Confirming P.O. 35248", "ship_via": "FXGD",
+    "lines": [
+      {"our_part": "V75014", "vendor_part": "V500-75/2-014", "qty": 20000, "unit_price": 1.94, "price_per": 100, "date": "10/20/26"},
+      {"our_part": "B70023", "vendor_part": "N200-70/2-023", "qty": 6000,  "unit_price": 0.80, "price_per": 100, "date": "10/20/26"},
+      {"our_part": "B70027", "vendor_part": "N200-70/2-027", "qty": 5000,  "unit_price": 0.99, "price_per": 100, "date": "10/20/26"},
+      {"our_part": "B70041", "vendor_part": "N200-70/2-041", "qty": 2000,  "unit_price": 3.08, "price_per": 100, "date": "10/20/26"}
+    ],
+    "charges": [], "notes": ["PLEASE NOTE CURRENT PRICE"]
+  }
+}

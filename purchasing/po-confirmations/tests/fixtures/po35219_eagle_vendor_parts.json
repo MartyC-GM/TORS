@@ -1,0 +1,20 @@
+{
+  "po": {
+    "id": 14674021, "tranid": "35219", "vendor_id": 1502, "vendor_name": "VN22 Eagle Elastomer",
+    "ship_method": "UPS® Ground", "ship_dates_confirmed": false,
+    "lines": [
+      {"line": 1, "item": "V75.070", "vendor_code": "CT0068/0072", "qty": 5000, "rate": 0.35, "expected_receipt_date": "12/07/2026"},
+      {"line": 2, "item": "V75.125", "vendor_code": "CT0122/0128", "qty": 1000, "rate": 0.55, "expected_receipt_date": "12/07/2026"},
+      {"line": 3, "item": "V75.139", "vendor_code": "CT0136/0142", "qty": 2500, "rate": 0.62, "expected_receipt_date": "12/07/2026"}
+    ]
+  },
+  "confirmation": {
+    "po_number": "35219", "email_subject": "RE: The O-Ring Store LLC: Purchase Order #35219", "ship_via": "UPS/GROUND/COLL",
+    "lines": [
+      {"our_part": null, "vendor_part": "CT0068/0072", "qty": 5000, "unit_price": 0.35, "price_per": 1, "date": "12/1/2026"},
+      {"our_part": null, "vendor_part": "CT0122/0128", "qty": 1000, "unit_price": 0.55, "price_per": 1, "date": "12/1/2026"},
+      {"our_part": null, "vendor_part": "CT0136/0142", "qty": 2500, "unit_price": 0.62, "price_per": 1, "date": "12/1/2026"}
+    ],
+    "charges": [], "notes": []
+  }
+}

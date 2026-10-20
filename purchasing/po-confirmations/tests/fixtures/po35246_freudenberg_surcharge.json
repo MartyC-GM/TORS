@@ -1,0 +1,16 @@
+{
+  "po": {
+    "id": 14696635, "tranid": "35246", "vendor_id": 1511, "vendor_name": "VN30 Freudenberg",
+    "ship_method": "UPS 2nd Day Air®", "ship_dates_confirmed": false,
+    "lines": [
+      {"line": 1, "item": "QR-222", "vendor_code": "75172535", "qty": 500, "rate": 0.1987, "expected_receipt_date": "10/22/2026"}
+    ]
+  },
+  "confirmation": {
+    "po_number": "35246", "email_subject": "Your order 35246", "ship_via": "UPS 2 DAY AIR",
+    "lines": [
+      {"our_part": "QR-222", "vendor_part": "75172535", "qty": 500, "unit_price": 19.87, "price_per": 100, "date": "10/21/2026"}
+    ],
+    "charges": [{"description": "Customs Surcharge", "amount": 1.85}], "notes": []
+  }
+}

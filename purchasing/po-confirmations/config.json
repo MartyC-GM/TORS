@@ -1,0 +1,174 @@
+{
+  "mailbox": "purchasing@theoringstore.com",
+  "notify_to": "purchasing@theoringstore.com",
+  "outlook_categories": {
+    "confirmed": "PO Bot: Confirmed",
+    "changes": "PO Bot: Confirmed w/ Changes",
+    "late": "PO Bot: Late",
+    "mismatch": "PO Bot: Didn't Match",
+    "skipped": "PO Bot: Not a Confirmation"
+  },
+  "netsuite_fields": {
+    "ship_dates_confirmed": "custbody23",
+    "expected_ship_date": "custbody20",
+    "line_expected_receipt_date": "expectedReceiptDate"
+  },
+  "price_tolerance": {
+    "_note": "A price is OK if the per-piece difference is just 4th-decimal rounding OR the whole line is off by 50 cents or less.",
+    "per_unit": 5e-05,
+    "per_line_dollars": 0.5
+  },
+  "late_tolerance_business_days": 2,
+  "extra_charges_block": false,
+  "ship_methods": {
+    "FedEx Priority Overnight®": {
+      "transit_days": 1,
+      "aliases": [
+        "FX1D",
+        "FEDEX PRIORITY OVERNIGHT",
+        "FEDEX PRIORITY",
+        "PRIORITY OVERNIGHT",
+        "FEDEX P1",
+        "FEDEX OVERNIGHT"
+      ]
+    },
+    "FedEx 2Day®": {
+      "transit_days": 2,
+      "aliases": [
+        "FX2D",
+        "FEDEX 2DAY",
+        "FEDEX 2 DAY",
+        "FEDEX 2ND DAY",
+        "FEDEX TWO DAY"
+      ]
+    },
+    "FedEx Ground®": {
+      "transit_days": 4,
+      "aliases": [
+        "FXG",
+        "FXGD",
+        "FEDEX GROUND",
+        "FEDEX GRD",
+        "FDX GROUND"
+      ]
+    },
+    "FedEx International Priority®": {
+      "transit_days": 5,
+      "aliases": [
+        "FEDEX INTERNATIONAL PRIORITY",
+        "FEDEX INTL PRIORITY",
+        "FEDEX IP",
+        "FIP"
+      ]
+    },
+    "FedEx International Economy®": {
+      "transit_days": 8,
+      "aliases": [
+        "FEDEX INTERNATIONAL ECONOMY",
+        "FEDEX INTL ECONOMY",
+        "FEDEX IE",
+        "FIE"
+      ]
+    },
+    "FedEx Sea Freight": {
+      "transit_days": 45,
+      "aliases": [
+        "SEA FREIGHT",
+        "OCEAN",
+        "BY SEA"
+      ]
+    },
+    "FedEx LTL Priority": {
+      "transit_days": 5,
+      "aliases": [
+        "FEDEX LTL",
+        "FEDEX FREIGHT PRIORITY"
+      ]
+    },
+    "UPS® Ground": {
+      "transit_days": 4,
+      "aliases": [
+        "UPS GROUND",
+        "UPS/GROUND",
+        "UPS GRD",
+        "UPSG",
+        "UPS/GROUND/COLL",
+        "UPS/GROUND/PPD"
+      ]
+    },
+    "UPS 2nd Day Air®": {
+      "transit_days": 2,
+      "aliases": [
+        "UPS 2 DAY AIR",
+        "UPS 2ND DAY AIR",
+        "UPS 2ND DAY",
+        "UPS 2DAY",
+        "UPS BLUE",
+        "2ND DAY AIR",
+        "UPS/2ND DAY"
+      ]
+    },
+    "UPS Next Day Air®": {
+      "transit_days": 1,
+      "aliases": [
+        "UPS NEXT DAY AIR",
+        "UPS NDA",
+        "UPS RED",
+        "UPS NEXT DAY",
+        "UPS 1 DAY"
+      ]
+    },
+    "UPS Next Day Air Saver®": {
+      "transit_days": 1,
+      "aliases": [
+        "UPS NEXT DAY AIR SAVER",
+        "UPS NDA SAVER",
+        "UPS SAVER"
+      ]
+    },
+    "UPS Worldwide Express®": {
+      "transit_days": 4,
+      "aliases": [
+        "UPS WORLDWIDE EXPRESS",
+        "UPS WW EXPRESS"
+      ]
+    },
+    "DHL": {
+      "transit_days": 5,
+      "aliases": [
+        "DHL",
+        "DHL EXPRESS"
+      ]
+    },
+    "Unishippers LTL": {
+      "transit_days": 5,
+      "aliases": [
+        "UNISHIPPERS",
+        "LTL"
+      ]
+    },
+    "Will Call": {
+      "transit_days": 0,
+      "aliases": [
+        "WILL CALL",
+        "PICK UP",
+        "PICKUP"
+      ]
+    }
+  },
+  "_vendor_overrides_note": "Keyed by NetSuite vendor internal id. transit_days overrides the ship method default for that vendor (Ground from Ohio takes longer than Ground from California). date_means is 'ship' (vendor date is when it leaves their dock) or 'arrival' (vendor date is when it lands here).",
+  "vendor_overrides": {
+    "21": {
+      "name": "VN01 Seal and Rubber Technologies",
+      "date_means": "ship"
+    },
+    "1502": {
+      "name": "VN22 Eagle Elastomer",
+      "date_means": "ship"
+    },
+    "1511": {
+      "name": "VN30 Freudenberg",
+      "date_means": "ship"
+    }
+  }
+}

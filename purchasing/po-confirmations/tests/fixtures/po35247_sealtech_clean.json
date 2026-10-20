@@ -1,0 +1,26 @@
+{
+  "po": {
+    "id": 14699253, "tranid": "35247", "vendor_id": 21, "vendor_name": "VN01 Seal and Rubber Technologies",
+    "ship_method": "FedEx Priority Overnight®", "ship_dates_confirmed": false,
+    "lines": [
+      {"line": 1, "item": "BV75272",    "vendor_code": "V510-75/2-272", "qty": 40,   "rate": 1.3614, "expected_receipt_date": "10/21/2026"},
+      {"line": 2, "item": "B90214",     "vendor_code": "N210-90/2-214", "qty": 2000, "rate": 0.0271, "expected_receipt_date": "10/21/2026"},
+      {"line": 3, "item": "E70247",     "vendor_code": "E100-70/2-247", "qty": 1000, "rate": 0.1418, "expected_receipt_date": "10/21/2026"},
+      {"line": 4, "item": "FDABV75148", "vendor_code": "V550-75/2-148", "qty": 200,  "rate": 0.2804, "expected_receipt_date": "10/21/2026"},
+      {"line": 5, "item": "FDABV75218", "vendor_code": "V550-75/2-218", "qty": 4383, "rate": 0.1822, "expected_receipt_date": "10/21/2026"},
+      {"line": 6, "item": "FDABV75230", "vendor_code": "V550-75/2-230", "qty": 200,  "rate": 0.3818, "expected_receipt_date": "10/21/2026"}
+    ]
+  },
+  "confirmation": {
+    "po_number": "35247", "email_subject": "Confirming P.O. 35247", "ship_via": "FX1D",
+    "lines": [
+      {"our_part": "BV75272",    "vendor_part": "V510-75/2-272", "qty": 40,   "unit_price": 136.13, "price_per": 100, "date": "10/20/26"},
+      {"our_part": "B90214",     "vendor_part": "N210-90/2-214", "qty": 2000, "unit_price": 2.71,   "price_per": 100, "date": "10/20/26"},
+      {"our_part": "E70247",     "vendor_part": "E100-70/2-247", "qty": 1000, "unit_price": 14.17,  "price_per": 100, "date": "10/20/26"},
+      {"our_part": "FDABV75148", "vendor_part": "V550-75/2-148", "qty": 200,  "unit_price": 28.03,  "price_per": 100, "date": "10/20/26"},
+      {"our_part": "FDABV75218", "vendor_part": "V550-75/2-218", "qty": 4383, "unit_price": 18.21,  "price_per": 100, "date": "10/20/26"},
+      {"our_part": "FDABV75230", "vendor_part": "V550-75/2-230", "qty": 200,  "unit_price": 38.17,  "price_per": 100, "date": "10/20/26"}
+    ],
+    "charges": [], "notes": []
+  }
+}
