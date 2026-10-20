@@ -1,13 +1,6 @@
 {
   "mailbox": "purchasing@theoringstore.com",
   "notify_to": "purchasing@theoringstore.com",
-  "outlook_categories": {
-    "confirmed": "PO Bot: Confirmed",
-    "changes": "PO Bot: Confirmed w/ Changes",
-    "late": "PO Bot: Late",
-    "mismatch": "PO Bot: Didn't Match",
-    "skipped": "PO Bot: Not a Confirmation"
-  },
   "netsuite_fields": {
     "ship_dates_confirmed": "custbody23",
     "expected_ship_date": "custbody20",

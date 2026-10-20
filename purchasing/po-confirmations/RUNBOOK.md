@@ -18,9 +18,12 @@ follow them by hand too. Everything lives in `purchasing/po-confirmations/`.
 - Only send email to the `notify_to` address in `config.json`. Never reply to vendors.
 - Never decide a match yourself. `po_check.py` decides. You read, fetch, run it,
   and do what it says.
-- If `DRY_RUN` is on (the prompt says so), do everything except NetSuite writes
-  and ledger writes, and send each email to martyc@theoringstore.com with
-  `[DRY RUN]` in front of the subject.
+- If `DRY_RUN` is on (the prompt says so), make no NetSuite writes. Send every
+  result to martyc@theoringstore.com instead of purchasing, with `[DRY RUN]` in
+  front of the subject, including `confirmed` ones (say "would have checked
+  Ship Dates Confirmed and set these dates: ..."). Use the ledger file
+  `dry-run-log-<YEAR>.json` instead of `processed-log-<YEAR>.json` so the dry
+  run doesn't block the live run from handling the same emails later.
 
 ## 1. Open the ledger
 
