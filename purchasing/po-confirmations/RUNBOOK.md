@@ -34,7 +34,8 @@ JSON list in Marty's OneDrive: `PO Confirmation Checker/processed-log-<YEAR>.jso
   `read_resource` on the folder and the file.
 - If the folder or file doesn't exist, create the file with
   `sharepoint_upload_file` (drive: `read_resource drive:///users/me`, content `[]`).
-- Each entry: `{"internet_message_id", "received", "sender", "subject", "po", "verdict", "processed_at"}`.
+- Each entry: `{"internet_message_id", "received", "sender", "subject", "po", "confirmation_no", "verdict", "processed_at"}`.
+  `confirmation_no` is the vendor's own order/confirmation number when there is one.
 
 ## 2. Find new emails
 
@@ -43,6 +44,9 @@ JSON list in Marty's OneDrive: `PO Confirmation Checker/processed-log-<YEAR>.jso
 
 Skip, without logging:
 - anything whose `internetMessageId` is already in the ledger
+- a confirmation whose vendor confirmation number is already in the ledger as
+  `confirmation_no` (Marty sometimes hands one over as a PDF before the email
+  lands; log it as `skipped` with a note that it was already handled)
 - anything sent from `@theoringstore.com` or `@netsuite.com` (that's us)
 
 ## 3. Is it a confirmation?
