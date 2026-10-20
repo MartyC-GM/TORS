@@ -59,6 +59,41 @@ Updates usually land on the sales orders within a minute or two of saving the PO
 customer email goes out 60 to 75 minutes after the last change (the script checks every
 15 minutes). Results show up in each script's Execution Log.
 
+## Turn it on slowly
+
+1. Set every deployment to **Status = Testing** at first. In Testing, the PO script only
+   fires when the script owner saves a PO, so nobody else's work kicks it off.
+2. Leave **Email Customers unchecked** on all three Map/Reduce deployments, and leave the
+   email script's deployment at Testing with no schedule.
+3. Save a PO or two yourself and check the sales orders. When the dates look right, set
+   the Map/Reduce and PO deployments to Released.
+4. When you're ready for emails, check Email Customers and release the email script.
+
+## Undo it
+
+Fastest off switch (stops everything in under a minute, nothing gets deleted):
+
+| What to stop | Where | Change |
+| --- | --- | --- |
+| Ship date updates from PO saves | The PO script's deployment (`_tors_ue_po_eta_to_so`) | Status = Not Scheduled, or check Inactive |
+| Nightly ship date sweep | The `_tors_mr_po_eta_to_so_nightly` deployment | Status = Not Scheduled |
+| Customer emails | The `_tors_ss_eta_email` deployment | Status = Not Scheduled |
+| Customer emails only (keep dates updating) | All Map/Reduce deployments | Uncheck Email Customers |
+
+Turn it back on by setting the same deployments back to Released.
+
+What stays after you turn it off:
+- **Ship dates already changed stay changed.** Every change shows in the sales order's
+  System Information > System Notes, which should show the old and new date, so a bad batch can be fixed
+  by hand or with a CSV import.
+- **Emails already sent can't be unsent.** Each one is logged on the order's Communication tab.
+- Orders waiting on an email keep a time in the hidden ETA Email Due field. With the email
+  script off, nothing happens with it.
+
+To remove it for good: set the deployments to Not Scheduled, delete the three script records
+(deployments go with them), delete the three files from the File Cabinet, then delete the
+ETA Email Due field.
+
 ## Test it
 
 Pick a backordered SO line, find an open PO for that item, change the PO line's Expected
