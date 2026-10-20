@@ -69,6 +69,17 @@ class RealConfirmations(unittest.TestCase):
         self.assertIn("Extra charges on the lines (Customs Surcharge): $98.54 total.", r["changes"])
 
 
+    def test_anyseals_35254_in_stock_no_dates(self):
+        data = load("po35254_anyseals_in_stock.json")
+        r = po_check.check(po_check.po_from_suiteql(data["po_rows"]), data["confirmation"], CONFIG, TODAY)
+        self.assertEqual(r["verdict"], "changes")
+        self.assertTrue(r["check_ship_dates_confirmed"])
+        # in stock on 10/20 -> ships 10/21 -> UPS 2nd Day lands 10/23, same as the PO already had
+        self.assertEqual(r["netsuite_update"]["line_updates"], [])
+        self.assertEqual(r["netsuite_update"]["body"]["custbody20"], "2026-10-21")
+        self.assertIn("Line 4 V1.50X022: vendor split this across 2 lines.", r["changes"])
+
+
 class Rules(unittest.TestCase):
     def setUp(self):
         self.data = copy.deepcopy(load("po35247_sealtech_clean.json"))

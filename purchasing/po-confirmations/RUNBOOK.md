@@ -87,6 +87,8 @@ Write it as JSON in this shape:
 - `date`: the per-line date they give (ship date, available date, delivery
   date). Copy it as printed.
 - Same part split across several lines or dates: list each one separately.
+- Vendor says "in stock" with no date: leave `date` null, set `"in_stock": true`,
+  and put the confirmation's own date in the top-level `"confirmation_date"`.
 - Per-line extras: if the vendor prints a surcharge under a line (customs,
   tariff, minimum line charge), put it in that line's own `"charges": [...]`
   and copy the vendor's line value into `"line_total"`. Small lines often get a

@@ -239,6 +239,8 @@ def check(po, conf, config, today=None):
     line_charge_total = 0.0
     charge_kinds = set()
     date_moves = {}  # (old, new) -> lines, so 20 lines moving the same way read as one line
+    in_stock_lines = []
+    conf_date = parse_date(conf.get("confirmation_date"))
     for l in open_lines:
         cls = matched[id(l)]
         tag = f"Line {l['line']} {l['item']}"
@@ -252,7 +254,7 @@ def check(po, conf, config, today=None):
         if abs(got_qty - want_qty) > 1e-9:
             problems.append(f"{tag}: qty ordered {want_qty:g}, vendor confirmed {got_qty:g}.")
         if len(cls) > 1:
-            changes.append(f"{tag}: vendor split this into {len(cls)} shipments.")
+            changes.append(f"{tag}: vendor split this across {len(cls)} lines.")
 
         # Price, per piece, after converting per-100 / per-1000 pricing
         po_rate = float(l["rate"])
@@ -283,8 +285,14 @@ def check(po, conf, config, today=None):
             for ch in line_charges:
                 charge_kinds.add(ch.get("description", "charge"))
 
-        # Dates
-        dates = [parse_date(c.get("date")) for c in cls]
+        # Dates. "In stock" with no date means it ships right after they confirmed it.
+        dates = []
+        for c in cls:
+            d = parse_date(c.get("date"))
+            if d is None and c.get("in_stock") and conf_date:
+                d = add_business_days(conf_date, config.get("in_stock_ship_business_days", 1))
+                in_stock_lines.append(str(l["line"]))
+            dates.append(d)
         if any(d is None for d in dates):
             problems.append(f"{tag}: no ship date on the confirmation.")
             continue
@@ -317,6 +325,11 @@ def check(po, conf, config, today=None):
             else:
                 date_moves.setdefault((fmt(old_receipt), fmt(new_receipt)), []).append(f"{l['line']} {l['item']}")
 
+    if in_stock_lines:
+        ship = add_business_days(conf_date, config.get("in_stock_ship_business_days", 1))
+        who = "Line" if len(set(in_stock_lines)) == 1 else "Lines"
+        changes.append(f"{who} {', '.join(dict.fromkeys(in_stock_lines))}: vendor said in stock with no date, "
+                       f"so I figured it ships {fmt(ship)}.")
     for (old, new), tags in date_moves.items():
         who = f"Line {tags[0]}" if len(tags) == 1 else f"Lines {', '.join(t.split()[0] for t in tags)}"
         changes.append(f"{who}: due date {old} -> {new}." if old != "none" else f"{who}: due date set to {new}.")
