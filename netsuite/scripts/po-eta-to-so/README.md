@@ -21,78 +21,65 @@ line keeps whatever date it already has.
 
 ## Setup in NetSuite
 
-1. **Custom field** (Customization > Lists, Records, & Fields > Transaction Body Fields > New)
-   - Label "ETA Email Due", ID `_tors_eta_email_due`, Type Free-Form Text.
-   - Applies To: Sale. Display tab: Display Type = Hidden. Store Value checked.
-   - It holds the time the customer email is due. Blank means nothing is waiting.
-2. Upload all three files to the File Cabinet under `SuiteScripts/TORS/`.
-3. **Map/Reduce script**
-   - Customization > Scripting > Scripts > New, pick `tors_mr_po_eta_to_so.js`.
-   - ID: `_tors_mr_po_eta_to_so`
-   - Parameters tab: add `_tors_eta_items`, type Long Text, label "Item IDs", and
-     `_tors_eta_notify`, type Check Box, label "Email Customers".
-   - Deployments (all Status = Released, Log Level = Audit, Email Customers checked):
-     - `_tors_mr_po_eta_to_so_1` and `_tors_mr_po_eta_to_so_2`, Not Scheduled. These are
-       what the PO save fires. Two of them means two POs saved back to back both run.
-     - `_tors_mr_po_eta_to_so_nightly`, Daily at 2:00 AM, parameter blank. Safety net that
-       catches anything missed (both deployments busy, inline edits, etc.).
-4. **User Event script**
-   - New script, pick `tors_ue_po_eta_to_so.js`, ID `_tors_ue_po_eta_to_so`.
-   - Deploy to Purchase Order, Status = Released, Event Type blank (runs on create, edit,
-     and inline edit), Execute As Role = Administrator.
-5. **Scheduled script** (the customer email)
-   - New script, pick `tors_ss_eta_email.js`, ID `_tors_ss_eta_email`.
-   - Parameters: `_tors_eta_email_template` (Integer, label "Email Template ID") and
-     `_tors_eta_email_author` (List/Record > Employee, label "Default Sender").
-   - Deploy: Status = Released, Daily, Repeat every 15 minutes, Template ID = `20`,
-     Default Sender = whoever should send when an order has no sales rep.
-   - Email comes from the sales rep on the order. It goes to the email on the sales
-     order, or the customer's email if the order doesn't have one, and lands on the
-     order's Communication tab.
+The click-by-click version is in the TORS install checklist page. This is the short form.
+Statuses: User Event scripts use Testing / Released. Map/Reduce and Scheduled scripts use
+Not Scheduled / Scheduled.
 
-**Heads up on the first run:** right now about 150 open orders would get new ship dates,
-which means about 150 customer emails an hour later. If you don't want that blast, uncheck
-Email Customers on the nightly deployment for its first run, then check it again the next
-morning.
+Day one sets everything up in safe mode: only the script owner's PO saves trigger it, and no
+customer emails go out.
+
+1. **Custom field** (Customization > Lists, Records, & Fields > Transaction Body Fields > New)
+   - Label "ETA Email Due", ID `_tors_eta_email_due`, Type Free-Form Text, Store Value checked.
+   - Applies To: Sale. Display: Display Type = Hidden.
+2. **Upload** `tors-po-eta-scripts.zip` into the File Cabinet's SuiteScripts folder with
+   Advanced Add and the unzip box checked.
+3. **Map/Reduce script** `tors_mr_po_eta_to_so.js`, ID `_tors_mr_po_eta_to_so`
+   - Parameters: `_tors_eta_items` (Long Text, "Item IDs") and `_tors_eta_notify`
+     (Check Box, "Email Customers").
+   - Deployment A "PO ETA Sync 1": Not Scheduled. Deployment B "PO ETA Sync 2": Not Scheduled.
+     Deployment C "PO ETA Sync Nightly": Not Scheduled for now, Daily at 2:00 am.
+     Email Customers unchecked on all three.
+4. **User Event script** `tors_ue_po_eta_to_so.js`, ID `_tors_ue_po_eta_to_so`
+   - Deployment: Applies To Purchase Order, Status Testing, Execute As Role Administrator.
+5. **Scheduled script** `tors_ss_eta_email.js`, ID `_tors_ss_eta_email`
+   - Deployment: Not Scheduled for now, Daily, repeat every 15 minutes.
+   - Uses template 20 ("1. Order Update Email Template"). Sends from the order's sales rep,
+     or Sales Team if there isn't one, to the order's email (or the customer's).
+
+## Go live
+
+1. **Dates for everybody:** User Event deployment to Released, Nightly deployment to Scheduled.
+   Let the nightly run go once. It catches up the roughly 150 orders already waiting, with
+   no emails, because emails are still off.
+2. **Emails:** check Email Customers on all three Map/Reduce deployments, and set the email
+   script's deployment to Scheduled.
 
 Updates usually land on the sales orders within a minute or two of saving the PO. The
-customer email goes out 60 to 75 minutes after the last change (the script checks every
-15 minutes). Results show up in each script's Execution Log.
-
-## Turn it on slowly
-
-1. Set every deployment to **Status = Testing** at first. In Testing, the PO script only
-   fires when the script owner saves a PO, so nobody else's work kicks it off.
-2. Leave **Email Customers unchecked** on all three Map/Reduce deployments, and leave the
-   email script's deployment at Testing with no schedule.
-3. Save a PO or two yourself and check the sales orders. When the dates look right, set
-   the Map/Reduce and PO deployments to Released.
-4. When you're ready for emails, check Email Customers and release the email script.
+customer email goes out 60 to 75 minutes after the last change. Results show in each
+script's Execution Log.
 
 ## Undo it
 
-Fastest off switch (stops everything in under a minute, nothing gets deleted):
+Fastest off switch (stops it in under a minute, nothing gets deleted):
 
-| What to stop | Where | Change |
+| What to stop | Deployment | Change |
 | --- | --- | --- |
-| Ship date updates from PO saves | The PO script's deployment (`_tors_ue_po_eta_to_so`) | Status = Not Scheduled, or check Inactive |
-| Nightly ship date sweep | The `_tors_mr_po_eta_to_so_nightly` deployment | Status = Not Scheduled |
-| Customer emails | The `_tors_ss_eta_email` deployment | Status = Not Scheduled |
-| Customer emails only (keep dates updating) | All Map/Reduce deployments | Uncheck Email Customers |
+| Ship date updates from PO saves | User Event | Status = Testing, or check Inactive |
+| Nightly ship date sweep | PO ETA Sync Nightly | Status = Not Scheduled |
+| Customer emails | Email script | Status = Not Scheduled |
+| Emails only, keep dates updating | All three Map/Reduce | Uncheck Email Customers |
 
-Turn it back on by setting the same deployments back to Released.
+Turn it back on by flipping the same settings back.
 
 What stays after you turn it off:
-- **Ship dates already changed stay changed.** Every change shows in the sales order's
-  System Information > System Notes, which should show the old and new date, so a bad batch can be fixed
-  by hand or with a CSV import.
-- **Emails already sent can't be unsent.** Each one is logged on the order's Communication tab.
+- **Ship dates already changed stay changed.** System Notes on the sales order should show
+  the old date, so a bad batch can be fixed by hand or with a CSV import.
+- **Emails already sent can't be unsent.** Each one is on the order's Communication tab.
 - Orders waiting on an email keep a time in the hidden ETA Email Due field. With the email
   script off, nothing happens with it.
 
-To remove it for good: set the deployments to Not Scheduled, delete the three script records
-(deployments go with them), delete the three files from the File Cabinet, then delete the
-ETA Email Due field.
+To remove it for good: delete the three script records (deployments go with them), delete
+the three files from SuiteScripts, then delete the ETA Email Due field.
 
 ## Test it
 

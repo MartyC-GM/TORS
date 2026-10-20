@@ -10,8 +10,8 @@
 define(['N/query', 'N/record', 'N/render', 'N/email', 'N/runtime', 'N/log'],
     (query, record, render, email, runtime, log) => {
         const EMAIL_DUE_FIELD = 'custbody_tors_eta_email_due';
-        const TEMPLATE_PARAM = 'custscript_tors_eta_email_template';
-        const AUTHOR_PARAM = 'custscript_tors_eta_email_author';
+        const TEMPLATE_ID = 20;        // 1. Order Update Email Template
+        const DEFAULT_AUTHOR = 3196556; // Sales Team, used when the order has no sales rep
         const MIN_USAGE = 100;
 
         const clearDue = (soId) => record.submitFields({
@@ -23,8 +23,6 @@ define(['N/query', 'N/record', 'N/render', 'N/email', 'N/runtime', 'N/log'],
 
         const execute = () => {
             const script = runtime.getCurrentScript();
-            const templateId = Number(script.getParameter({ name: TEMPLATE_PARAM }));
-            const defaultAuthor = Number(script.getParameter({ name: AUTHOR_PARAM }));
 
             const pending = query.runSuiteQL({
                 query: `SELECT t.id, t.tranid, t.entity, t.employee,
@@ -47,13 +45,13 @@ define(['N/query', 'N/record', 'N/render', 'N/email', 'N/runtime', 'N/log'],
                     }
 
                     const merged = render.mergeEmail({
-                        templateId,
+                        templateId: TEMPLATE_ID,
                         entity: { type: 'customer', id: Number(so.entity) },
                         transactionId: Number(so.id)
                     });
 
                     email.send({
-                        author: Number(so.employee) || defaultAuthor,
+                        author: Number(so.employee) || DEFAULT_AUTHOR,
                         recipients: [so.email],
                         subject: merged.subject,
                         body: merged.body,
