@@ -7,9 +7,16 @@
  *
  * Parameter custscript_tors_eta_items: JSON array of item internal IDs.
  * Left blank (the nightly scheduled deployment), it checks every backordered line.
+ *
+ * Parameter custscript_tors_eta_notify: when checked, a changed SO gets
+ * custbody_tors_eta_email_due set to 60 minutes out, and tors_ss_eta_email
+ * sends the customer the Order Update email once that time passes.
  */
 define(['N/query', 'N/record', 'N/runtime', 'N/log'], (query, record, runtime, log) => {
     const ITEMS_PARAM = 'custscript_tors_eta_items';
+    const NOTIFY_PARAM = 'custscript_tors_eta_notify';
+    const EMAIL_DUE_FIELD = 'custbody_tors_eta_email_due';
+    const EMAIL_DELAY_MS = 60 * 60 * 1000;
 
     const getInputData = () => {
         const raw = runtime.getCurrentScript().getParameter({ name: ITEMS_PARAM });
@@ -60,6 +67,10 @@ define(['N/query', 'N/record', 'N/runtime', 'N/log'], (query, record, runtime, l
         });
 
         if (changed) {
+            // Another change before the email goes out pushes it back, so the customer gets one email.
+            if (runtime.getCurrentScript().getParameter({ name: NOTIFY_PARAM })) {
+                so.setValue({ fieldId: EMAIL_DUE_FIELD, value: String(Date.now() + EMAIL_DELAY_MS) });
+            }
             so.save({ ignoreMandatoryFields: true });
             log.audit('SO ship dates updated', `SO ${context.key}: ${changed} line(s)`);
         }
