@@ -55,6 +55,20 @@ class RealConfirmations(unittest.TestCase):
         self.assertEqual(r["netsuite_update"]["line_updates"], [])
 
 
+    def test_freudenberg_35238_big_order(self):
+        data = load("po35238_freudenberg_24_lines.json")
+        r = po_check.check(po_check.po_from_suiteql(data["po_rows"]), data["confirmation"], CONFIG, TODAY)
+        self.assertEqual(r["verdict"], "mismatch")
+        self.assertIsNone(r["netsuite_update"])
+        # cord confirmed in meters at a higher price, and N888 slipped a month
+        self.assertEqual(len(r["problems"]), 1)
+        self.assertIn("N70.550", r["problems"][0])
+        self.assertIn("B70125-N888", r["late"][0])
+        # min line charges on QR-433 and BV75175 are already in our PO price
+        self.assertFalse(any("QR-433" in p or "BV75175" in p for p in r["problems"]))
+        self.assertIn("Extra charges on the lines (Customs Surcharge): $98.54 total.", r["changes"])
+
+
 class Rules(unittest.TestCase):
     def setUp(self):
         self.data = copy.deepcopy(load("po35247_sealtech_clean.json"))
@@ -111,6 +125,12 @@ class Rules(unittest.TestCase):
         self.assertEqual(r["verdict"], "changes")
         self.assertTrue(r["check_ship_dates_confirmed"])
 
+    def test_same_date_move_is_grouped(self):
+        for l in self.conf["lines"]:
+            l["date"] = "10/21/26"
+        r = run(self.data)
+        self.assertIn("Lines 1, 2, 3, 4, 5, 6: due date 10/21/2026 -> 10/22/2026.", r["changes"])
+
     def test_missing_date(self):
         self.conf["lines"][0]["date"] = "TBD"
         self.assertEqual(run(self.data)["verdict"], "mismatch")
@@ -155,6 +175,33 @@ class Rules(unittest.TestCase):
         cfg["extra_charges_block"] = True
         self.conf["charges"] = [{"description": "Tariff", "amount": 12}]
         self.assertEqual(po_check.check(self.po, self.conf, cfg, TODAY)["verdict"], "mismatch")
+
+
+class LineCharges(unittest.TestCase):
+    def setUp(self):
+        self.data = copy.deepcopy(load("po35247_sealtech_clean.json"))
+        self.conf = self.data["confirmation"]
+
+    def test_minimum_line_charge_matches_all_in_po_price(self):
+        # Freudenberg 35238 BV75175: PO $5.00 for 1 pc, vendor $1.57 + $3.36 min + $0.07 customs = $5.00
+        self.data["po"]["lines"][0].update(qty=1, rate=5)
+        self.conf["lines"][0].update(qty=1, unit_price=157.00, price_per=100, line_total=5.00,
+                                     charges=[{"description": "Minimum line surcharge", "amount": 3.36},
+                                              {"description": "Customs Surcharge", "amount": 0.07}])
+        r = run(self.data)
+        self.assertNotEqual(r["verdict"], "mismatch")
+        self.assertFalse(any("Extra charges" in c for c in r["changes"]))
+
+    def test_per_line_surcharges_are_added_up(self):
+        self.conf["lines"][0]["charges"] = [{"description": "Customs Surcharge", "amount": 4.30}]
+        self.conf["lines"][1]["charges"] = [{"description": "Customs Surcharge", "amount": 5.20}]
+        r = run(self.data)
+        self.assertEqual(r["verdict"], "changes")
+        self.assertIn("Extra charges on the lines (Customs Surcharge): $9.50 total.", r["changes"])
+
+    def test_line_total_does_not_hide_a_real_price_change(self):
+        self.conf["lines"][4].update(unit_price=19.21, line_total=4383 * 0.1921)
+        self.assertEqual(run(self.data)["verdict"], "mismatch")
 
 
 class DateOnlyAndRows(unittest.TestCase):

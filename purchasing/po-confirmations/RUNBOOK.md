@@ -87,7 +87,15 @@ Write it as JSON in this shape:
 - `date`: the per-line date they give (ship date, available date, delivery
   date). Copy it as printed.
 - Same part split across several lines or dates: list each one separately.
-- `charges`: any surcharge, tariff, freight, or handling charge with a dollar amount above zero.
+- Per-line extras: if the vendor prints a surcharge under a line (customs,
+  tariff, minimum line charge), put it in that line's own `"charges": [...]`
+  and copy the vendor's line value into `"line_total"`. Small lines often get a
+  minimum charge that our PO already priced in, and `line_total` lets the
+  checker see the money is the same.
+- Different unit than our PO (meters vs feet, etc.): convert the quantity to
+  our unit, set `unit_price` to the vendor's line value and `price_per` to that
+  quantity, and add a note saying exactly what the vendor wrote.
+- `charges`: order-level surcharge, tariff, freight, or handling with a dollar amount above zero.
 - `notes`: anything the vendor calls out about price, quantity, dates, or
   substitutions. Short, in their words.
 - `date_only`: if the vendor only gave a date with no prices or quantities

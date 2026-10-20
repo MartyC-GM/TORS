@@ -236,6 +236,9 @@ def check(po, conf, config, today=None):
 
     line_updates = []
     ship_dates = []
+    line_charge_total = 0.0
+    charge_kinds = set()
+    date_moves = {}  # (old, new) -> lines, so 20 lines moving the same way read as one line
     for l in open_lines:
         cls = matched[id(l)]
         tag = f"Line {l['line']} {l['item']}"
@@ -259,14 +262,26 @@ def check(po, conf, config, today=None):
                 continue
             per = float(c.get("price_per") or 1)
             conf_rate = float(c["unit_price"]) / per
+            qty = float(c.get("qty") or want_qty)
             diff = conf_rate - po_rate
-            line_diff = diff * float(c.get("qty") or want_qty)
-            if abs(diff) > tol["per_unit"] + 1e-9 and abs(line_diff) > tol["per_line_dollars"] + 1e-9:
+            line_diff = diff * qty
+            line_charges = c.get("charges") or []
+            price_ok = abs(diff) <= tol["per_unit"] + 1e-9 or abs(line_diff) <= tol["per_line_dollars"] + 1e-9
+            # Small lines: vendor prices the part low and adds a minimum line charge,
+            # we put the all-in number on the PO. Same money, so it's a match.
+            if not price_ok and c.get("line_total") is not None:
+                if abs(float(c["line_total"]) - po_rate * qty) <= tol["per_line_dollars"] + 1e-9:
+                    price_ok = True
+                    line_charges = []
+            if not price_ok:
                 way = "higher" if diff > 0 else "lower"
                 problems.append(
                     f"{tag}: price on PO {per_piece(po_rate)}/pc, vendor has {per_piece(conf_rate)}/pc "
                     f"({way}, {money(abs(line_diff))} on the line)."
                 )
+            line_charge_total += sum(float(ch.get("amount") or 0) for ch in line_charges)
+            for ch in line_charges:
+                charge_kinds.add(ch.get("description", "charge"))
 
         # Dates
         dates = [parse_date(c.get("date")) for c in cls]
@@ -300,10 +315,17 @@ def check(po, conf, config, today=None):
                 late.append(f"{tag}: now due {fmt(new_receipt)}, we had {fmt(old_receipt)} "
                             f"({business_days_between(old_receipt, new_receipt)} business days late).")
             else:
-                changes.append(f"{tag}: due date {fmt(old_receipt)} -> {fmt(new_receipt)}." if old_receipt
-                               else f"{tag}: due date set to {fmt(new_receipt)}.")
+                date_moves.setdefault((fmt(old_receipt), fmt(new_receipt)), []).append(f"{l['line']} {l['item']}")
+
+    for (old, new), tags in date_moves.items():
+        who = f"Line {tags[0]}" if len(tags) == 1 else f"Lines {', '.join(t.split()[0] for t in tags)}"
+        changes.append(f"{who}: due date {old} -> {new}." if old != "none" else f"{who}: due date set to {new}.")
 
     # Surcharges, tariffs, freight the PO doesn't have
+    if line_charge_total > 0:
+        msg = (f"Extra charges on the lines ({', '.join(sorted(charge_kinds))}): "
+               f"{money(line_charge_total)} total.")
+        (problems if config.get("extra_charges_block") else changes).append(msg)
     for ch in conf.get("charges", []) or []:
         msg = f"Extra charge on confirmation: {ch.get('description', 'charge')} {money(float(ch.get('amount') or 0))}."
         (problems if config.get("extra_charges_block") else changes).append(msg)
