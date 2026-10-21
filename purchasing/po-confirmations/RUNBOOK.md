@@ -37,6 +37,10 @@ JSON list in Marty's OneDrive: `PO Confirmation Checker/processed-log-<YEAR>.jso
 - Each entry: `{"internet_message_id", "received", "sender", "subject", "po", "confirmation_no", "verdict", "processed_at"}`.
   `confirmation_no` is the vendor's own order/confirmation number when there is one.
 
+If NetSuite isn't connected (its tools are missing or ask to sign in), still
+log the non-confirmations, but leave real confirmations out of the ledger so the
+next run picks them up, and say in the summary that NetSuite needs reconnecting.
+
 ## 2. Find new emails
 
 `outlook_email_search` with `mailboxOwnerEmail: purchasing@theoringstore.com`,
