@@ -61,6 +61,12 @@ our purchase orders: "order confirmation", "order acknowledgement", "confirming
 P.O.", "your order 35246", a sales order built from our PO, or a reply that
 gives dates against our PO.
 
+Delay notices or "we request to extend the ship date" emails that only cover
+some lines: don't run the checker and don't touch NetSuite. Pull those lines
+from NetSuite, check qty and price still match, and email purchasing a short
+table of old vs. new ship dates by PO and line so someone can accept, push
+back, or expedite. Log it as `delay_request`.
+
 Not confirmations (log as `skipped`, no email): invoices, packing slips,
 delivery notes, ship notices and tracking, quotes, statements, sales pitches,
 "thanks, confirmation coming shortly" replies, and line cancellation notices.
