@@ -61,6 +61,9 @@ our purchase orders: "order confirmation", "order acknowledgement", "confirming
 P.O.", "your order 35246", a sales order built from our PO, or a reply that
 gives dates against our PO.
 
+Two confirmations for the same PO in the same run: use the newest one (vendors
+re-send to fix mistakes) and log the older one as `superseded`.
+
 Delay notices or "we request to extend the ship date" emails that only cover
 some lines: don't run the checker and don't touch NetSuite. Pull those lines
 from NetSuite, check qty and price still match, and email purchasing a short
