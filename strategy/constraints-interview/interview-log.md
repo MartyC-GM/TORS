@@ -7,7 +7,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 - **Status:** In progress
 - **Next module:** Module 0, The Goals Themselves
 - **Next question:** 0.1 "When you say $10 million this year, what does hitting it give you?"
-- **Follow-ups owed:** Where did $354K of profit plus the cash shortfall go? (draws, buyout, inventory build, loans, equipment). Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
+- **Follow-ups owed:** Groundwork loan: terms, repayment, what it's for. Was paying off PayPal Capital and P1FCU early a choice? Bookkeeper items: payroll tax liabilities, AP vs. AP schedule mismatch, GM Financial and Ally account types. Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
 - **Baseline in use:** `baseline-2026-10.md`
 
 ## Progress
@@ -33,6 +33,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 | 1b | **Built for $10M, selling at $4.8M.** Payroll and costs were sized ahead of sales. New customers flat at about 850 a month for two years. Constraint is demand, not capacity. | Market | NetSuite + Marty 0.1b | Known (sales side), payroll number pending |
 | 2 | Not enough mid-size accounts. 15,500 customers, only 66 over $10K a year. | Market / Sales | Baseline | Known (data), cause unknown |
 | 3 | **Profitable but cash-poor.** $354K net income YTD while about $165K behind on bills. Cash is going to balance sheet items (inventory, debt, draws, buyout) that the P&L doesn't show. Need a monthly cash flow view, not just a P&L. | Capital / Administration | Income statement 0.1c | Known (gap), cause pending |
+| 3b | **Capital leaving the business.** $293K lent to Groundwork, $106K of debt paid off early, all in a year the cash ran tight. A policy constraint: no rule on what TORS cash can be used for. | Policy / Capital | Balance sheets 0.1d | Known |
 | 4 | Marty believes capital is the constraint. | Capital | Marty, master prompt | Believed |
 
 ## Answers captured
@@ -85,6 +86,34 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - Fixed costs run about $222K a month. At 63% gross margin, breakeven is about $352K a month in sales. We're doing about $409K. That's a cushion of only about 14%.
   - **Read:** the business is profitable on paper ($354K YTD, about $36K a month). But we're about $165K behind on bills. So the cash went somewhere the income statement doesn't show: inventory build, loan payments, owner draws, the shareholder buyout (account 27001, Amanda), equipment, or vehicles. That's the balance sheet, and it's the next thing to check.
   - $33K in late fees and penalties is money lost to the cash crunch itself. Software at $174K YTD is high for a 17-person company and worth a line-by-line review.
+
+- **0.1d Where did the cash go?** Marty sent balance sheets for Dec 31, 2025 (BalanceSheet94) and FY 2026 to date (BalanceSheet135). Cash flow traced, ties to within about $200. (Known)
+
+  | Where the money came from | |
+  |---|---|
+  | Net income YTD | +$354K |
+  | Vendors carried more (AP net of the A/P adjusting account) | +$92K |
+  | More customer deposits | +$26K |
+  | **Total in** | **about $476K** |
+
+  | Where it went | |
+  |---|---|
+  | Paid off debt: PayPal Capital $74K, P1FCU loan $21K, truck loan $11K | $106K |
+  | Payroll taxes parked on the balance sheet (negative liability accounts) | $85K |
+  | **New loan to Groundwork** (25800 "GW Loan from TORS") | $60K |
+  | Inventory build | $62K |
+  | Vehicles and equipment | $37K |
+  | AR and undeposited funds up | $44K |
+  | Accrued purchases and accrued interest paid down | $35K |
+  | Shareholder buyout (27000) | $19K |
+  | **Total out** | **about $448K** |
+  | Bank balance change | +$28K |
+
+  - **Groundwork:** TORS now has about **$293K** out to Groundwork ($233K in 13500 GW Loan from before 2026, plus $60K this year). That's more than the whole current shortfall. (Known)
+  - **Payroll taxes:** employer Social Security, Medicare, and federal withholding are sitting as negative liabilities (about -$85K) instead of hitting the P&L. The income statement shows only $22K of employer tax on $992K of wages; it should be more like $75K to $80K. So **real net income is probably closer to $270K**, not $354K. Bookkeeper item. (Known pattern, exact number pending)
+  - **AP mismatch:** NetSuite AP is $103K, but the AP schedule shows $346K of open bills. The A/P Adjusting Account went from -$247K to -$7K. Something in AP isn't reconciled. Bookkeeper item. (Known)
+  - No owner draws recorded in 2026. Notes receivable from Daro ($25K) and Darion ($29K) unchanged.
+  - **Read:** the business didn't lose money. Cash went to paying off debt early ($106K), Groundwork ($60K), inventory, and equipment, while vendors quietly financed the gap. Paying off PayPal Capital and the P1FCU loan was a good long-term move but drained the cushion. With the Groundwork money back, we'd be close to even.
 
 ## Data requests
 
