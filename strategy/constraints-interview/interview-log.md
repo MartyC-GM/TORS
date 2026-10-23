@@ -172,6 +172,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 
 _(Anything we decide along the way, with the date.)_
 
+- **2026-10-23: Customer category = type of buyer.** Manufacturers are called OEM. Marty approved, and 39 customers were changed to OEM in NetSuite: the 13 top-25 manufacturers (Avionic, JST and Meditrina keep their old industry in Comments) plus 26 active Manufacturing-tagged customers who bought in the last 12 months. 58 Manufacturing-tagged customers with no recent sales, and inactive Pack4, were left alone. Next: add an Industry field and tag customers as they order.
+
 - **2026-10-23: No more TORS money goes to Groundwork.** Marty expects the $293K already out to be a straight loss. Handle the Groundwork loan as its own project (CPA on write-off and tax treatment).
 - **2026-10-23: Two tracks from here.** Track 1 is a 10-week cash plan to get even by Jan 1 (about $165K gap). Track 2 is to keep going with the interview (Module 1, Demand) to find the growth constraint.
 
