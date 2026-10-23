@@ -64,7 +64,7 @@ Purchasing, accounting and everything else waits during selling time unless a cu
 # 6. Review and Compliance
 
 - **Monday meeting:** first-time $1,000+ customers in the last week, calls made, calls still open past 7 days, and how many have come back for a second order. Shown on the TORS Get-Whole Scorecard.
-- **Target:** every first-time $1,000+ customer called within 7 business days. At least half of them reorder within 90 days (today it's about 1 in 4).
+- **90-day goals (through late January 2027):** sales of at least **$125K a week**, stretch $156K. At least **25% of first-time buyers order again within 90 days** (it was 12% in Q2 2026). Every first-time $1,000+ customer called within 7 business days.
 - **Monthly:** Marty reviews the selling-time commitments and the account split, and moves accounts if one person's load is too heavy.
 - Review this SOP every quarter, or sooner if the assignment rules change.
 

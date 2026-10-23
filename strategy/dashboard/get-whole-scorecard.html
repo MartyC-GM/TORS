@@ -46,15 +46,15 @@
 <div class="sc">
   <header class="sc-head">
     <h1 class="sc-title" id="top">TORS Get-Whole Scorecard</h1>
-    <p class="sc-take" id="take">Last full week's sales were <b class="dash-skeleton" data-source="sales_status" data-field="last_sales" data-row="0">—</b>, <b class="dash-skeleton" data-source="sales_status" data-field="last_gap" data-row="0">—</b> against the $97K weekly target. Bills more than 15 days late: <b class="dash-skeleton" data-source="ap_status" data-field="over15" data-row="0">—</b>.</p>
-    <p class="sc-goal">Goal: be whole by February 1. That means $97K a week in sales, no bill more than 15 days past due, payroll first, no new stock buys except against a customer order, and TORS cash stays in TORS.</p>
+    <p class="sc-take" id="take">Last full week's sales were <b class="dash-skeleton" data-source="sales_status" data-field="last_sales" data-row="0">—</b>, <b class="dash-skeleton" data-source="sales_status" data-field="last_gap" data-row="0">—</b> against the $125K weekly goal. Bills more than 15 days late: <b class="dash-skeleton" data-source="ap_status" data-field="over15" data-row="0">—</b>.</p>
+    <p class="sc-goal">Sales goal through January: $125K a week minimum, $156K stretch. Cash floor: $97K a week keeps us whole by February 1. First-time buyers: at least 25% come back within 90 days. Rules:  no bill more than 15 days past due, payroll first, no new stock buys except against a customer order, and TORS cash stays in TORS.</p>
   </header>
 
   <section class="sc-tiles" id="tiles">
     <div class="sc-tile">
       <span class="sc-tile-label">This week so far</span>
       <span class="sc-big dash-skeleton" id="t-cur" data-source="sales_status" data-field="cur_sales" data-row="0">—</span>
-      <span class="sc-tile-note">Target $97K a week</span>
+      <span class="sc-tile-note">Goal $125K a week, stretch $156K</span>
     </div>
     <div class="sc-tile">
       <span class="sc-tile-label">Last full week</span>
@@ -83,6 +83,12 @@
       <span class="sc-big dash-skeleton" id="t-cards" data-source="cash_cards" data-field="cards" data-row="0">—</span>
       <span class="sc-tile-note">MC and Amex</span>
     </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">First-time buyers who came back</span>
+      <span class="sc-big dash-skeleton" id="t-repeat" data-source="repeat_status" data-field="rate" data-row="0">—</span>
+      <span class="sc-tile-note">Bought for the first time in the last 90 days and ordered again. Goal 25%, was 12%</span>
+      <span class="sc-pill" id="p-repeat"></span>
+    </div>
   </section>
 
   <section class="sc-sec" id="sales">
@@ -90,11 +96,11 @@
     <div class="sc-grid">
       <div class="sc-card">
         <h3 id="sales-chart-h">Sales by week</h3>
-        <p class="sc-note">Invoices and cash sales, less credits. Dashed line is the $97K target. The lighter bar is the week in progress.</p>
+        <p class="sc-note">Invoices and cash sales, less credits. Dashed lines: $125K weekly goal and $97K cash floor. The lighter bar is the week in progress.</p>
         <div class="sc-chart dash-skeleton" id="sales-chart" data-source="sales_weekly"></div>
         <div class="sc-stats" id="plan-stats">
           <div class="sc-stat"><b class="dash-skeleton" data-source="sales_status" data-field="plan_sales" data-row="0">—</b><span>Sold since Oct 26</span></div>
-          <div class="sc-stat"><b class="dash-skeleton" data-source="sales_status" data-field="plan_target" data-row="0">—</b><span>Target since Oct 26</span></div>
+          <div class="sc-stat"><b class="dash-skeleton" data-source="sales_status" data-field="plan_target" data-row="0">—</b><span>Goal since Oct 26</span></div>
           <div class="sc-stat"><b class="dash-skeleton" id="plan-gap" data-source="sales_status" data-field="plan_gap" data-row="0">—</b><span>Ahead or behind</span></div>
         </div>
       </div>
@@ -203,8 +209,8 @@
 
 <script>
 dash.calc('sales_status', {
-  title: 'Sales vs. $97K target',
-  description: 'Last full week and the week in progress, plus totals since the plan started on Oct 26 against $97K a week.',
+  title: 'Sales vs. $125K weekly goal',
+  description: 'Last full week and the week in progress, plus totals since the plan started on Oct 26 against the $125K weekly goal.',
   inputs: ['sales_weekly'],
   fn: (sales_weekly) => {
     const rows = sales_weekly.map(r => ({ week: String(r.week), sales: Number(r.sales), current: Number(r.is_current) }));
@@ -216,14 +222,25 @@ dash.calc('sales_status', {
     return [{
       last_week: last ? last.week : null,
       last_sales: last ? last.sales : null,
-      last_gap: last ? last.sales - 97000 : null,
+      last_gap: last ? last.sales - 125000 : null,
       cur_week: cur ? cur.week : null,
       cur_sales: cur ? cur.sales : 0,
       plan_weeks: plan.length,
       plan_sales: planSales,
-      plan_target: plan.length * 97000,
-      plan_gap: planSales - plan.length * 97000
+      plan_target: plan.length * 125000,
+      plan_gap: planSales - plan.length * 125000
     }];
+  }
+});
+
+dash.calc('repeat_status', {
+  title: 'First-timers who came back',
+  description: 'Share of customers whose first purchase was in the last 90 days who have ordered again.',
+  inputs: ['first_timers_90d'],
+  fn: (first_timers_90d) => {
+    const r = first_timers_90d[0] || {};
+    const n = Number(r.first_timers) || 0, back = Number(r.came_back) || 0;
+    return [{ first_timers: n, came_back: back, rate: n ? back / n : null }];
   }
 });
 
@@ -248,7 +265,8 @@ dash.calc('open_po_total', {
   const pct = d3.format('.0%');
   const parseDay = d3.utcParse('%Y-%m-%d');
   const dayFmt = d3.utcFormat('%b %-d');
-  const TARGET = 97000;
+  const TARGET = 125000;
+  const FLOOR = 97000;
 
   const marks = sel => Array.from(document.querySelectorAll(sel));
   const setPill = (id, text, cls) => { const p = document.getElementById(id); p.className = 'sc-pill ' + (cls || ''); p.textContent = text || ''; };
@@ -283,7 +301,7 @@ dash.calc('open_po_total', {
     const W = Math.max(280, el.clientWidth || 600), H = 220, mt = 14, mb = 24, mr = 8;
     const fmtY = cfg.fmtY || big;
     const maxV = d3.max(rows, r => d3.max(cfg.series, s => Number(r[s.key]) || 0)) || 0;
-    const y = d3.scaleLinear([0, Math.max(maxV, cfg.target || 0) * 1.08 || 1], [H - mb, mt]).nice();
+    const y = d3.scaleLinear([0, Math.max(maxV, cfg.target || 0) * 1.12 || 1], [H - mb, mt]).nice();
     const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
     const ticks = y.ticks(4);
     const probe = svg.append('g');
@@ -314,7 +332,12 @@ dash.calc('open_po_total', {
     if (cfg.target) {
       g.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(cfg.target)).attr('y2', y(cfg.target))
         .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1.5).attr('stroke-dasharray', '5 4');
-      g.append('text').attr('class', 'tl').attr('x', W - mr).attr('y', y(cfg.target) - 5).attr('text-anchor', 'end').text('Target ' + big(cfg.target));
+      g.append('text').attr('class', 'tl').attr('x', W - mr).attr('y', y(cfg.target) - 5).attr('text-anchor', 'end').text('Goal ' + big(cfg.target));
+    }
+    if (cfg.target2) {
+      g.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(cfg.target2)).attr('y2', y(cfg.target2))
+        .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1).attr('stroke-dasharray', '2 4');
+      g.append('text').attr('x', ml + 4).attr('y', y(cfg.target2) - 5).attr('text-anchor', 'start').text('Cash floor ' + big(cfg.target2));
     }
     const tip = d3.select(el).append('div').attr('class', 'sc-tip').style('display', 'none');
     g.selectAll(null).data(rows).join('rect')
@@ -347,13 +370,16 @@ dash.calc('open_po_total', {
     fillMarks('cash_cards');
     fillMarks('ap_status', { open_bills: count });
     fillMarks('open_po_total');
+    fillMarks('repeat_status', { rate: d3.format('.0%'), first_timers: count, came_back: count });
+    const rs = dash.data('repeat_status');
+    if (rs.status === 'ok' && rs.data[0] && rs.data[0].rate !== null) { const v = Number(rs.data[0].rate); setPill('p-repeat', v >= 0.25 ? 'At goal' : 'Under 25% goal', v >= 0.25 ? 'sc-ok' : 'sc-bad'); } else setPill('p-repeat', '');
     fillMarks('backorders', { items_backordered: count });
     fillMarks('dead_stock', { dead_skus: count });
 
     const ss = dash.data('sales_status');
     if (ss.status === 'ok' && ss.data[0]) {
       const s = ss.data[0];
-      if (s.last_sales !== null) setPill('p-last', s.last_sales >= TARGET ? 'On target' : 'Under target', s.last_sales >= TARGET ? 'sc-ok' : 'sc-bad');
+      if (s.last_sales !== null) setPill('p-last', s.last_sales >= TARGET ? 'Hit the goal' : (s.last_sales >= FLOOR ? 'Above cash floor, under goal' : 'Under cash floor'), s.last_sales >= TARGET ? 'sc-ok' : (s.last_sales >= FLOOR ? 'sc-warn' : 'sc-bad'));
       const gapEl = document.getElementById('plan-gap');
       gapEl.className = s.plan_weeks === 0 ? '' : (s.plan_gap >= 0 ? 'sc-ok' : 'sc-bad');
       if (s.plan_weeks === 0) gapEl.textContent = 'Starts Oct 26';
@@ -366,9 +392,9 @@ dash.calc('open_po_total', {
     // Sales chart
     const sw = dash.data('sales_weekly'), sEl = document.getElementById('sales-chart');
     if (chartState(sEl, sw.status)) bars(sEl, sw.data, {
-      series: [{ key: 'sales', color: c0 }], target: TARGET,
+      series: [{ key: 'sales', color: c0 }], target: TARGET, target2: FLOOR,
       dim: r => Number(r.is_current) === 1,
-      tip: r => [['Sales', money(Number(r.sales))], ['Invoices', count(Number(r.invoices))], ['Vs. target', signed(Number(r.sales) - TARGET)]]
+      tip: r => [['Sales', money(Number(r.sales))], ['Invoices', count(Number(r.invoices))], ['Vs. $125K goal', signed(Number(r.sales) - TARGET)]]
     });
 
     // Quotes chart

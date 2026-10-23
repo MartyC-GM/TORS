@@ -181,7 +181,7 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 _(Anything we decide along the way, with the date.)_
 
 - **2026-10-23: 90-day targets (to about Jan 21, 2027).** Marty: weekly sales up 25%, "to at least be $133,000 a week," and first-time buyers coming back at least 25% of the time within 90 days.
-  - Check: 2026 has averaged about $95K a week. Up 25% is about $119K. $133K is about 40% up, and January usually runs around $83K to $89K a week, so $133K in January would be about 50% over last January. Asked Marty which number is the target.
+  - Check: 2026 has averaged about $95K a week. Up 25% is about $119K. $133K is about 40% up, and January usually runs around $83K to $89K a week, so $133K in January would be about 50% over last January. **Marty's answer: $125K a week minimum, and it'd be nice to beat that by 25% (about $156K).** Not stated as a percentage. "We're investing a lot of high-paid professionals, and if we don't get this, it's going to be embarrassing as fuck and detrimental." Dashboard updated: $125K goal line, $97K cash floor line, and a first-timer repeat-rate tile (at 10% on 10/23, 269 of 2,598).
   - Baseline for repeat: of 2,416 first-time buyers in Q2 2026, 299 (12%) ordered again within 90 days. First-timers at $1,000+: 3 of 14 (21%). So 25% means about doubling the overall repeat rate.
 
 - **2026-10-23: Selling time set.** Marty, Daro and Darion each do 2 hours inbound + 2 hours proactive sales every day (4 hours each). Janevea does 1 hour, as one team with Marty. That's about 13 hours a day of protected selling time, plus Anson and Sophie. SOP updated.
