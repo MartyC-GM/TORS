@@ -37,6 +37,11 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 
 _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed / Guess.)_
 
+### Module 0: The Goals Themselves (2026-10-23)
+
+- **0.1 What $10M gets us:** "Increase the inventory, pay all the bills, make sure we're starting even by the first of the year, and actually give us a little purse to really make a push next year." (Believed)
+  - Read: $10M isn't the goal itself. It's how we pay for the real goals: (a) more inventory, (b) bills paid and starting the year even, (c) a pot of money for next year's push. "Starting even" hints we're behind on something right now. Following up.
+
 ## Data requests
 
 - Full P&L for the last 12 months, including payroll if it lives outside NetSuite.
