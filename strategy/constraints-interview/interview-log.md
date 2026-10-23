@@ -6,7 +6,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 
 - **Status:** In progress (paused 10/23/2026)
 - **Next module:** Module 1, Demand (nearly done), then Module 2, Sales Process
-- **Next question:** "Who decides whether we pay to expedite or the customer does, and how much can a rep approve on their own?"
+- **Next question:** "When should TORS eat the expedite cost vs. charge the customer, and how much can purchasing approve without Marty?"
 - **Follow-ups owed:** Late-order notice setup (Slack reminder to Marty Sun 10/25 8 AM). Add NetSuite and Slack connectors to the morning assignment scheduled task. House-account backlog (1,411 customers) parked. Bookkeeping fixes. PO 35258 decision (roll back or ask Darion about the $400 lines).
 - **Baseline in use:** `baseline-2026-10.md`
 
@@ -176,6 +176,9 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 
 - **1.8c What can we do when they need it sooner?** "We have an expedite option or a substitution, always. Just cost money." (Believed)
   - Read: speed is always possible; the question is who pays and who decides. Without a rule, the rep either won't offer it or has to ask Marty every time. Idea: a simple expedite rule (when TORS eats the cost, when the customer pays, dollar limit a rep can approve on their own).
+
+- **1.8d Who decides on expediting?** "Right now, it is Autumn that does it. Maybe it should come through the salesperson, and it's decided by either purchasing or a purchasing assistant/expediter." (Believed)
+  - Proposed flow: customer asks for it sooner -> salesperson owns the conversation -> purchasing or an expediter picks the option (expedite, partial ship, substitute) and the cost -> salesperson tells the customer and confirms. Still open: who pays (TORS or customer) and the dollar limit purchasing can approve without Marty.
 
 ## Data requests
 
