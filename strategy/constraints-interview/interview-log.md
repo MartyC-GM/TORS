@@ -157,6 +157,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 - **1.3 Best OEM and why us?** "Spray Poly Parts, and we believe it's because they order online and in bulk, and the pricing is good." (Believed)
   - **Checked in NetSuite:** two customer records. SprayPolyParts (CU115961, no category) $3.1K, and Spray Polyurethane Parts (CU119736, tagged Distribution) $8.0K. About **$11K combined** in the last 12 months. (Known)
   - Read: our best OEM in Marty's mind is an $11K-a-year account that NetSuite calls a distributor, and it's split across two records. So the OEM base is thin, and the reasons we win (online, bulk, price) aren't unique to us. Next: define the target OEM by size and what they make.
+- **Top 25 customers, last 12 months** (Marty asked, 10/23; branches rolled up to parent): $1.03M combined, about 20% of sales. Biggest is Cabka at $89K (1.7%). **15 of the 25 build products** (Cabka, Acorn, Semco Tank, Dwyer, Avionic, PolyJohn, Engineered Composites, JST, Q-Pumps, Meditrina, Air Squared, Rugged Suppressors, Checkpoint Pumps, Excel Plastics, Pacific Fusion), about $590K. Only Dwyer and Checkpoint are tagged OEM. Distributors: McMaster $82K, Fastenal (37 branches) $44K, Motion (51 branches) $43K, JMJ, HMFT, Maqui. Estimated gross margin ranges from about 20% (Engineered Composites) to 90% (Dwyer); NetSuite's estimated cost, so treat as rough. (Known)
+  - Read: OEMs are already our biggest customers, they're just untagged and each is small. Getting to $10M through OEMs means about 100 OEM accounts at $50K+, versus about 5 today.
 
 ## Data requests
 
