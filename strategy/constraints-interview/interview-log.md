@@ -32,7 +32,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 | 1 | Capital is tied up in slow inventory ($1.43M at about 1.4 turns, $251K with no sales in 12 months). Getting more out of stock may beat raising new money. | Capital / Policy | Baseline | Known (data), cause unknown |
 | 1b | **Built for $10M, selling at $4.8M.** Payroll and costs were sized ahead of sales. New customers flat at about 850 a month for two years. Constraint is demand, not capacity. | Market | NetSuite + Marty 0.1b | Known (sales side), payroll number pending |
 | 2 | Not enough mid-size accounts. 15,500 customers, only 66 over $10K a year. | Market / Sales | Baseline | Known (data), cause unknown |
-| 3 | No full profit picture in NetSuite (opex looks light). Hard to plan capital without it. | Administration | Baseline | Guess |
+| 3 | **No full profit picture.** 2026 payroll isn't posted in NetSuite at all, so the P&L overstates profit and nobody can see the real burn. Hard to plan capital without it. | Administration | NetSuite 0.1c | Known |
 | 4 | Marty believes capital is the constraint. | Capital | Marty, master prompt | Believed |
 
 ## Answers captured
@@ -64,6 +64,10 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
     - NetSuite shows about $145K a month in operating profit **before payroll**. Real profit depends on the payroll number.
     - Other costs worth a look: software $60K a quarter (about $240K a year), shipping $78K a quarter, late fees and interest $5.3K a quarter. (Known)
   - **Read:** the slide is on the spending side, not the sales side. Sales and new customers held steady while bills climbed and margin slipped. "Stacked to do $10M" while selling at a $4.8M pace means the cost base was built ahead of revenue. That points the main constraint at **demand / sales conversion** (Market), with cost discipline as the urgent fix.
+- **0.1c Payroll in NetSuite?** Marty saw "60200 - Salaries and Wages" on the custom income statement. (Checked)
+  - 60200 is an **inactive** parent account. The active wage accounts are 60000, 60100, 60300, 60500 (WM), 60600 (SM), plus employer tax 613xx and employee tax 621xx.
+  - **Nothing has posted to any wage or payroll tax account in 2026.** Since July 2025 the only entries are one year-end journal in Dec 2025 (60100 Payroll Tax Expense +$182.9K with offsets) and a $20K FUTA vendor bill in April 2026. (Known)
+  - Read: 2026 payroll is going out of the bank but isn't being booked as an expense. NetSuite's 2026 profit is overstated by the full year's payroll, and cash looks like it's vanishing. This is a bookkeeping gap, and an administration-plan item. Need: who runs payroll, through what system, which bank account, and the monthly total.
 
 ## Data requests
 
