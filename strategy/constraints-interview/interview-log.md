@@ -180,6 +180,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 
 _(Anything we decide along the way, with the date.)_
 
+- **2026-10-23: Order assignment and selling time.** Marty set protected selling time (Marty 2 hrs, Janevea 1 hr with Marty, Daro 2 inbound + 2 proactive) and routing for every sales order over $250: OEM, pumps, distributors to Marty and Janevea; oil, gas and energy to Darion; military and aerospace to Anson; retail, individuals and no company name to house; everyone else, including fluid power and untagged customers, to Daro. SOP: `strategy/sops/SOP-Sales-Order-Assignment.md`. Daily Slack DM to each owner chosen; scheduled weekdays 7:17 AM Pacific starting 10/26 (needs NetSuite and Slack connectors added to the scheduled task). Still open: Sophie's role, and whether customers who already have a named rep get re-sorted.
+
 - **2026-10-23: Customer category = type of buyer.** Manufacturers are called OEM. Marty approved, and 39 customers were changed to OEM in NetSuite: the 13 top-25 manufacturers (Avionic, JST and Meditrina keep their old industry in Comments) plus 26 active Manufacturing-tagged customers who bought in the last 12 months. 58 Manufacturing-tagged customers with no recent sales, and inactive Pack4, were left alone. Next: add an Industry field and tag customers as they order.
 
 - **2026-10-23: No more TORS money goes to Groundwork.** Marty expects the $293K already out to be a straight loss. Handle the Groundwork loan as its own project (CPA on write-off and tax treatment).
