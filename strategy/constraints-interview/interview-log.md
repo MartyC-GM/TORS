@@ -128,6 +128,16 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - **A loan alone doesn't work** (Plan D). The repayment, about $5K to $6K a week, eats what little the slow months make. The loan only works paired with buying less.
   - **First move:** starting Monday, buy only for open orders and proven fast movers. It's free, it's in our control, and it's the piece every working plan depends on.
 
+- **Sales-only worst case** (Marty, 10/23): no loan, no vendor calls, every bill paid no more than 15 days late, cash only from sales. Added as a tab in the cash forecast.
+  - $35K of bills are already more than 15 days late and have to be paid now. Existing AP comes due (+15 days) heavily in the first 6 weeks: about $102K, $75K, $61K, $43K, $26K, $40K.
+  - **Open purchase orders not yet received: about $291K** (Freudenberg $114K, GE MAO $82K, Tuico $25K, Best Ring $10K). These become bills Dec to Jan. (Known)
+  - At plan sales: cash goes negative the week of Nov 2, bottoms around -$31K mid-November, recovers early December, then open POs pull it to about -$57K by Jan 22. Negative 10 of 13 weeks.
+  - **What it takes:** about $10K a week (about $43K a month) more sales than plan keeps cash above zero the whole way, meaning Nov to Jan sold at the Jun to Oct pace (about $416K a month). A $40K cushion from sales alone would take about $25K a week extra, which isn't realistic.
+  - If sales come in 10% under plan: about -$168K by Jan 22.
+  - **Buying limits:** stocked items that would run short in 13 weeks at the 12-month pace total only about $65K to replenish ($41K for items under 4 weeks of supply, $24K for 4 to 13 weeks). Open POs ($291K) more than cover it. $903K of stock sits in 6,439 SKUs with over a year of supply. So: no new stock buys until February, buy-to-order only against a customer order.
+  - If half the open POs slide past January, Jan 22 cash goes from about -$57K to about +$52K. Biggest single lever, and it's a buying decision, not a bill call.
+  - Note: average cost on the 1,051 items with zero on hand looks unreliable (it implies $2.7M a year of cost against $1.5M actual COGS). Worth a cleanup.
+
 ## Data requests
 
 - Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
