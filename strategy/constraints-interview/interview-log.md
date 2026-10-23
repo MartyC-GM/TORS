@@ -138,6 +138,13 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - If half the open POs slide past January, Jan 22 cash goes from about -$57K to about +$52K. Biggest single lever, and it's a buying decision, not a bill call.
   - Note: average cost on the 1,051 items with zero on hand looks unreliable (it implies $2.7M a year of cost against $1.5M actual COGS). Worth a cleanup.
 
+- **Weekly sales target to be whole by Feb 1** (Marty, 10/23): 50% GP, sales only, no new purchases, open POs arrive as ordered, all bills paid within due date + 15 days.
+  - Cash out Oct 26 to Jan 31 (14 weeks): about $1.27M (payroll, expenses, existing AP $346K, open POs as they come due, cards, loans, buyout).
+  - **$97K a week (about $422K a month) keeps cash at or above zero every week.** The tight spot is the week of Nov 9. That's about $17K a week over plan.
+  - $101K a week also pays off the $55K of credit cards by Feb 1. $118K a week holds a $40K cushion the whole way.
+  - At 50% GP, $97K a week uses about $680K of inventory at cost over 14 weeks. On hand $1.43M + open POs $291K covers it, but only about $560K of that is in items that turn within a year, so about $120K has to come out of slow stock.
+  - After February, once we restock: break-even is about $108K a week at 50% GP, or about $86K a week at our actual 63%.
+
 ## Data requests
 
 - Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
