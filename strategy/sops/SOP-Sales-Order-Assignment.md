@@ -4,7 +4,7 @@ The O-Ring Store LLC · Effective October 26, 2026 · Owner: Marty Frostad
 
 # 1. Scope
 
-This covers every sales order over $250, from any channel (website, phone, email, marketplace), and the daily selling time for Marty, Janevea, Daro, Darion and Anson. It applies to new and existing customers.
+This covers every sales order over $250, from any channel (website, phone, email, marketplace), and the daily inbound and proactive selling time for Marty, Janevea, Daro, Darion and Anson. It applies to new and existing customers.
 
 # 2. Purpose
 
@@ -31,13 +31,16 @@ We are all sales first, customers first. Today a good customer can place a big o
 
 **Protected selling time, every working day:**
 
-| Person | Daily selling time |
-|---|---|
-| Marty | 2 hours |
-| Janevea | 1 hour (with Marty) |
-| Daro | 2 hours inbound plus 2 hours proactive |
-| Darion | Time as needed for his accounts |
-| Anson | Time as needed for his accounts |
+| Person | Inbound sales | Proactive sales | Total a day |
+|---|---|---|---|
+| Marty | 2 hours | 2 hours | 4 hours |
+| Daro | 2 hours | 2 hours | 4 hours |
+| Darion | 2 hours | 2 hours | 4 hours |
+| Janevea | 1 hour total (works with Marty as one team) | | 1 hour |
+| Anson | Technical sales, his accounts | | As needed |
+
+- **Inbound** means working the orders, quotes and calls that come to us, starting with the morning assignment list.
+- **Proactive** means going after business that isn't calling us yet: first-time $1,000+ customers, the top accounts, quiet customers, and new OEMs.
 
 Purchasing, accounting and everything else waits during selling time unless a customer is waiting on it.
 
