@@ -7,7 +7,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 - **Status:** In progress
 - **Next module:** Module 0, The Goals Themselves
 - **Next question:** 0.1 "When you say $10 million this year, what does hitting it give you?"
-- **Follow-ups owed:** Monthly payroll all-in (wages + taxes + benefits) by month for 2026; reconnect QuickBooks. Why gross margin % slid from 66% to 60%. Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
+- **Follow-ups owed:** Where did $354K of profit plus the cash shortfall go? (draws, buyout, inventory build, loans, equipment). Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
 - **Baseline in use:** `baseline-2026-10.md`
 
 ## Progress
@@ -32,7 +32,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 | 1 | Capital is tied up in slow inventory ($1.43M at about 1.4 turns, $251K with no sales in 12 months). Getting more out of stock may beat raising new money. | Capital / Policy | Baseline | Known (data), cause unknown |
 | 1b | **Built for $10M, selling at $4.8M.** Payroll and costs were sized ahead of sales. New customers flat at about 850 a month for two years. Constraint is demand, not capacity. | Market | NetSuite + Marty 0.1b | Known (sales side), payroll number pending |
 | 2 | Not enough mid-size accounts. 15,500 customers, only 66 over $10K a year. | Market / Sales | Baseline | Known (data), cause unknown |
-| 3 | **No full profit picture.** 2026 payroll isn't posted in NetSuite at all, so the P&L overstates profit and nobody can see the real burn. Hard to plan capital without it. | Administration | NetSuite 0.1c | Known |
+| 3 | **Profitable but cash-poor.** $354K net income YTD while about $165K behind on bills. Cash is going to balance sheet items (inventory, debt, draws, buyout) that the P&L doesn't show. Need a monthly cash flow view, not just a P&L. | Capital / Administration | Income statement 0.1c | Known (gap), cause pending |
 | 4 | Marty believes capital is the constraint. | Capital | Marty, master prompt | Believed |
 
 ## Answers captured
@@ -64,14 +64,33 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
     - NetSuite shows about $145K a month in operating profit **before payroll**. Real profit depends on the payroll number.
     - Other costs worth a look: software $60K a quarter (about $240K a year), shipping $78K a quarter, late fees and interest $5.3K a quarter. (Known)
   - **Read:** the slide is on the spending side, not the sales side. Sales and new customers held steady while bills climbed and margin slipped. "Stacked to do $10M" while selling at a $4.8M pace means the cost base was built ahead of revenue. That points the main constraint at **demand / sales conversion** (Market), with cost discipline as the urgent fix.
-- **0.1c Payroll in NetSuite?** Marty saw "60200 - Salaries and Wages" on the custom income statement. (Checked)
-  - 60200 is an **inactive** parent account. The active wage accounts are 60000, 60100, 60300, 60500 (WM), 60600 (SM), plus employer tax 613xx and employee tax 621xx.
-  - **Nothing has posted to any wage or payroll tax account in 2026.** Since July 2025 the only entries are one year-end journal in Dec 2025 (60100 Payroll Tax Expense +$182.9K with offsets) and a $20K FUTA vendor bill in April 2026. (Known)
-  - Read: 2026 payroll is going out of the bank but isn't being booked as an expense. NetSuite's 2026 profit is overstated by the full year's payroll, and cash looks like it's vanishing. This is a bookkeeping gap, and an administration-plan item. Need: who runs payroll, through what system, which bank account, and the monthly total.
+- **0.1c Payroll in NetSuite?** Marty sent the FY 2026 Custom Income Statement (CustomIncomeStatement216.xlsx). **Correction: payroll IS in NetSuite.** The SuiteQL connection can't see payroll postings (most likely a role permission), so my earlier "nothing posted" read was wrong. Use the income statement report for payroll from here on. (Known)
+  - **FY 2026 year to date (about 9.7 months):**
+
+    | Line | YTD | % of income |
+    |---|---|---|
+    | Total income | $3.97M | 100% |
+    | Cost of sales (incl. inbound freight $141K, tariffs $58K) | $1.46M | 37% |
+    | **Gross profit** | **$2.51M** | **63%** |
+    | Payroll all in (wages $992K, taxes $59K, health $125K, comp $7K) | $1.19M | 30% |
+    | Outbound shipping + fuel surcharge | $319K | 8% (shipping income was $336K) |
+    | Software | $174K | 4.4% |
+    | Rent | $84K | 2.1% |
+    | Marketing | $84K | 2.1% |
+    | PayPal fees | $55K | 1.4% |
+    | Late fees, penalties, interest | $33K | 0.8% |
+    | **Net income** | **$354K** | **8.9%** |
+
+  - Payroll runs about $102K a month in wages, about $122K a month all in.
+  - Fixed costs run about $222K a month. At 63% gross margin, breakeven is about $352K a month in sales. We're doing about $409K. That's a cushion of only about 14%.
+  - **Read:** the business is profitable on paper ($354K YTD, about $36K a month). But we're about $165K behind on bills. So the cash went somewhere the income statement doesn't show: inventory build, loan payments, owner draws, the shareholder buyout (account 27001, Amanda), equipment, or vehicles. That's the balance sheet, and it's the next thing to check.
+  - $33K in late fees and penalties is money lost to the cash crunch itself. Software at $174K YTD is high for a 17-person company and worth a line-by-line review.
 
 ## Data requests
 
-- Full P&L for the last 12 months, including payroll. **Confirmed payroll is not in NetSuite.** Reconnect QuickBooks (claude.ai connector settings) or export a payroll summary by month.
+- Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
+- Balance sheet at Dec 31, 2025 vs. today (to see where the cash went).
+- Note: the SuiteQL connection can't see payroll postings. Use NetSuite reports for anything payroll.
 - Lost-sale tracking: do we capture "couldn't fill" or "lost on price"? If not, consider starting.
 - Sales by channel (web store vs. phone/email vs. marketplace) if NetSuite can split it.
 
