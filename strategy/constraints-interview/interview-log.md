@@ -145,6 +145,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - At 50% GP, $97K a week uses about $680K of inventory at cost over 14 weeks. On hand $1.43M + open POs $291K covers it, but only about $560K of that is in items that turn within a year, so about $120K has to come out of slow stock.
   - After February, once we restock: break-even is about $108K a week at 50% GP, or about $86K a week at our actual 63%.
 
+- **Working answer on the constraint (10/23, before Modules 1 to 8):** the constraint is **demand**, meaning not enough of the right customers ordering, especially mid-size accounts. Doubling test: doubling inventory wouldn't double sales ($903K already sits in items with over a year of supply). Doubling staff wouldn't either (we're built for more than we sell). Doubling demand would, since the shelves and crew can handle it. Evidence: new customers flat at about 850 a month for two years, 15,500 customers but only 66 over $10K a year, $175 average invoice, quote win rate is fine, sales come in on their own (web and inbound) with no outbound engine. Made worse by a **policy constraint**: no rules on cash (Groundwork, early debt payoff) and buying ahead of demand (1.4 turns, $291K open POs, PO run lines raised to $400). The capital squeeze is a symptom, not the root. Modules 1 and 2 test this.
+
 ## Data requests
 
 - Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
