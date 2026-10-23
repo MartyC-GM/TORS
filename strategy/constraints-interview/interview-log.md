@@ -214,4 +214,5 @@ _(Anything we decide along the way, with the date.)_
 | Date | Modules covered | Notes |
 |---|---|---|
 | 2026-10-23 | Setup | Built skill, pulled baseline from NetSuite and HubSpot |
+| 2026-10-23 (later) | Module 1 (most of it) | OEMs are the target and already our biggest customers (untagged). 39 recategorized to OEM. Constraint narrowed: first-time buyers aren't caught (75% of $1K+ never return). Built order assignment SOP + morning Slack task, selling time (13 hrs/day), $125K/week goal, 25% repeat goal, late-order notice script, expedite SOP. Paused at Module 1 wrap-up question. |
 | 2026-10-23 | Module 0 (0.1) | AP schedule, income statement, balance sheets. Found the cash went to debt payoff, Groundwork, inventory, equipment. Decided: no more money to Groundwork, two-track plan. |
