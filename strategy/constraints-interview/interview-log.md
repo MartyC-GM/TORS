@@ -165,6 +165,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - Read: about one $1K+ first-timer a week walks in the door, and 3 out of 4 never come back. That's a catch-and-keep problem, not a find-them problem. A rule like "every first order over $1,000 gets a call from Sophie within a week" costs almost nothing.
 - **1.3c Does Sophie have room?** "She can do some, but not every one of them. I also have, in the sales department, Anson, Darion, Daro, myself, and Janevea. It's not a lack of people." (Believed)
   - Read: six people touch sales (Sophie, Anson, Darion, Daro, Marty, Janevea), and still about one $1K+ first-timer a week never gets a call. So it isn't headcount. It's **no trigger, no owner, no follow-up**. A process and policy constraint inside the demand constraint. Fix idea: an automatic alert on every first order over $1,000, assigned in rotation to a named person, with a 7-day call and a 30-day follow-up, tracked on the scorecard. Next: where does the sales team's time actually go today?
+- **1.3d Where does sales time go?** "They are [busy]. Everybody has another role: purchasing, marketing, accounting, general manager, but I think all those need to be understood. We are all sales first, customers first." (Believed)
+  - Read: "sales first" is the culture, but not how the day is built. Everyone's main job is something else, so sales happens when a customer calls, not by plan. When everybody owns sales, nobody owns growing accounts. TOC step 3 (subordinate) says the other jobs should bend around the constraint: protected selling time, named accounts per person, a scorecard per person. The Elevate step may be one person whose main job is growing accounts the way Sophie grew Cabka.
 
 ## Data requests
 
