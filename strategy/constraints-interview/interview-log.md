@@ -154,6 +154,9 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 - **1.7 Who should we have 10x more of?** "OEMs. Original equipment manufacturers." (Believed)
   - **Checked in NetSuite:** only 66 customers are tagged OEM, $161K in the last 12 months (about 3% of sales). But **14,254 of 15,500 customers (about $3.43M, 67% of sales) have no category at all.** Many top accounts look like OEMs (Cabka, Acorn Engineering, Dwyer, PolyJohn, Air Squared, Radium, Penske Racing Shocks, Rugged Suppressors) but aren't tagged. (Known)
   - Read: we can't see how many OEMs we have, so we can't aim at them or measure growth. Tagging customers by type is a cheap admin fix that serves the sales constraint.
+- **1.3 Best OEM and why us?** "Spray Poly Parts, and we believe it's because they order online and in bulk, and the pricing is good." (Believed)
+  - **Checked in NetSuite:** two customer records. SprayPolyParts (CU115961, no category) $3.1K, and Spray Polyurethane Parts (CU119736, tagged Distribution) $8.0K. About **$11K combined** in the last 12 months. (Known)
+  - Read: our best OEM in Marty's mind is an $11K-a-year account that NetSuite calls a distributor, and it's split across two records. So the OEM base is thin, and the reasons we win (online, bulk, price) aren't unique to us. Next: define the target OEM by size and what they make.
 
 ## Data requests
 
