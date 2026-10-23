@@ -23,6 +23,8 @@ We are all sales first, customers first. Today a good customer can place a big o
 - **Marty and Janevea** work the OEM, pump and distributor accounts as a team. Marty is the name on the account. Janevea backs him up and handles follow-through.
 - **Daro** owns every other company. He also tags the category on any uncategorized customer and passes it to the right owner if it belongs to someone else.
 - **Whoever enters the sales order** makes sure the customer has a Category before saving. If unsure, leave it blank and Daro sorts it out.
+- **Sophie** is not assigned new accounts under this SOP.
+- **House-account customers (Sales Rep = TORS)** who place an order over $250 get moved to an owner by the table above. If there's no category, best guess from the company name; if that's unclear, round robin (Marty, Daro, Darion, Anson). Customers who already have a named rep keep that rep.
 - **Marty** reviews this SOP and the assignment numbers every Monday.
 
 # 4. Expectations
@@ -49,7 +51,7 @@ Purchasing, accounting and everything else waits during selling time unless a cu
 # 5. Procedure
 
 1. **Order comes in over $250.** Whoever enters or reviews the sales order checks that the customer's Category is filled in.
-2. **Assign the owner** from the table in section 3. Set the customer's Sales Rep in NetSuite to that owner. If the customer already has a different owner, leave it and tell Marty.
+2. **Assign the owner** from the table in section 3. If the customer's Sales Rep is TORS, set it to that owner (the morning task does this automatically). If the customer already has a named rep, leave it and work it out with them.
 3. **Morning assignment list.** Each workday morning, each owner gets the list of yesterday's orders over $250 that are theirs, with first-time customers and orders over $1,000 flagged.
 4. **Owner acts during selling time.** Review every order. Call every first-time $1,000+ customer within 7 business days, and log it in HubSpot.
 5. **30-day check-in.** The owner follows up with every first-time $1,000+ customer 30 days after the first call.
