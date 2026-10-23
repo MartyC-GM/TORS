@@ -168,6 +168,10 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 - **1.3d Where does sales time go?** "They are [busy]. Everybody has another role: purchasing, marketing, accounting, general manager, but I think all those need to be understood. We are all sales first, customers first." (Believed)
   - Read: "sales first" is the culture, but not how the day is built. Everyone's main job is something else, so sales happens when a customer calls, not by plan. When everybody owns sales, nobody owns growing accounts. TOC step 3 (subordinate) says the other jobs should bend around the constraint: protected selling time, named accounts per person, a scorecard per person. The Elevate step may be one person whose main job is growing accounts the way Sophie grew Cabka.
 
+- **1.8 Where does the extra $30K a week come from?** "With a little attention and care, especially in expediting, we're going to get more frequent orders and first-time [buyers] coming back." (Believed)
+  - **Checked in NetSuite, Q3 2026 orders over $250 (891 that shipped):** 65% shipped in 0 to 1 days, 8% in 2 to 5 days, **14% in 6 to 14 days, and 13% (115 orders) took 15+ days**. Average 5.8 days. (Known)
+  - Read: about 1 in 4 bigger orders waits more than 5 days (backorders, special orders, buyouts). That's where expediting and keeping the customer posted matter most, and where a first-timer decides whether to come back. Next: who tells the customer when an order runs late, and how fast?
+
 ## Data requests
 
 - Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
