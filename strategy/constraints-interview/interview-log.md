@@ -171,6 +171,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 - **1.8 Where does the extra $30K a week come from?** "With a little attention and care, especially in expediting, we're going to get more frequent orders and first-time [buyers] coming back." (Believed)
   - **Checked in NetSuite, Q3 2026 orders over $250 (891 that shipped):** 65% shipped in 0 to 1 days, 8% in 2 to 5 days, **14% in 6 to 14 days, and 13% (115 orders) took 15+ days**. Average 5.8 days. (Known)
   - Read: about 1 in 4 bigger orders waits more than 5 days (backorders, special orders, buyouts). That's where expediting and keeping the customer posted matter most, and where a first-timer decides whether to come back. Next: who tells the customer when an order runs late, and how fast?
+- **1.8b Who tells the customer?** "We have typically been sending an order update, but we don't ask the customer if it's okay. We don't ask them if it's expediting. We don't even make sure they got the email. Customer service sends it out, but they don't notify the salesperson responsible either." (Known, Marty's account)
+  - Read: the delay message goes one way, nobody confirms it landed, nobody asks "does this date work or do you need it sooner?", and the account owner never hears about it. So the person who owns the relationship finds out when the customer is already upset, or never. Fix ideas: (1) add "your customers' late orders" to each owner's morning Slack list; (2) change the order status email to ask "Does this date work, or do you need it sooner?" with a reply that goes to the owner; (3) owner calls on any late order over $1,000 or any first-time buyer.
 
 ## Data requests
 
