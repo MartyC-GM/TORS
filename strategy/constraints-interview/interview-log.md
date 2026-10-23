@@ -6,7 +6,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 
 - **Status:** In progress (paused 10/23/2026)
 - **Next module:** Module 1, Demand (nearly done), then Module 2, Sales Process
-- **Next question:** "When should TORS eat the expedite cost vs. charge the customer, and how much can purchasing approve without Marty?"
+- **Next question:** Module 1 wrap-up: "Of everything we just talked about, what's the one thing that, if it were fixed tomorrow, would grow sales the most?"
 - **Follow-ups owed:** Late-order notice setup (Slack reminder to Marty Sun 10/25 8 AM). Add NetSuite and Slack connectors to the morning assignment scheduled task. House-account backlog (1,411 customers) parked. Bookkeeping fixes. PO 35258 decision (roll back or ask Darion about the $400 lines).
 - **Baseline in use:** `baseline-2026-10.md`
 
@@ -191,6 +191,8 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 ## Decisions made
 
 _(Anything we decide along the way, with the date.)_
+
+- **2026-10-23: Expedite rule.** If the customer asks for it sooner, the customer pays. If we messed up, TORS pays, and purchasing can approve up to 25% of the order total; over that goes to Marty. Flow: customer -> salesperson -> purchasing/expediter (Autumn) picks the fix -> salesperson tells the customer. SOP: `strategy/sops/SOP-Expedite-and-Substitution.md`.
 
 - **2026-10-23: Late-order notices automated.** Marty: a NetSuite script finds late orders and emails the customer through HubSpot as the salesperson; replies notify the rep; late orders over $1,000 or from new customers also get a call task for the rep. Built: `netsuite/scripts/tors_mr_late_order_notice.js` (Map/Reduce, dry run on by default, 25 a day cap, 7-day resend), setup in `netsuite/scripts/README-late-order-notice.md`, sequence email in `hubspot/late-order-update-email.md`. On 10/23, 270 open orders were late (64 over $1,000, 94 house accounts). Not deployed yet; needs the HubSpot sequence, properties and private app, plus the NetSuite field, API secret and script record.
 
