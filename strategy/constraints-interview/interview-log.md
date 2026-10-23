@@ -115,6 +115,19 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - No owner draws recorded in 2026. Notes receivable from Daro ($25K) and Darion ($29K) unchanged.
   - **Read:** the business didn't lose money. Cash went to paying off debt early ($106K), Groundwork ($60K), inventory, and equipment, while vendors quietly financed the gap. Paying off PayPal Capital and the P1FCU loan was a good long-term move but drained the cushion. With the Groundwork money back, we'd be close to even.
 
+- **13-week cash forecast built** (`strategy/cash-plan/TORS_13-Week_Cash_Forecast.xlsx`, 10/23). Marty has a PayPal line, repaid at about 10% of sales. Results through Jan 22:
+
+  | Plan | Lowest cash | Cash Jan 22 |
+  |---|---|---|
+  | A: business as usual | -$118K | -$118K |
+  | B: tighten up (buy 25% less, cut software, sell dead stock, vendor plans) | -$61K | +$16K |
+  | C: tighten up + $150K PayPal loan | +$22K | +$79K (still owe PayPal about $93K) |
+  | D: PayPal loan only | -$41K | -$41K |
+
+  - **Why "we make money" doesn't cover it:** Nov to Jan sales run about $350K to $385K a month, and at that level the business is about break-even (fixed costs about $228K a month, gross margin about 64%). The profit gets made in the busy months. The $148K of past-due bills has to be paid out of the slow months.
+  - **A loan alone doesn't work** (Plan D). The repayment, about $5K to $6K a week, eats what little the slow months make. The loan only works paired with buying less.
+  - **First move:** starting Monday, buy only for open orders and proven fast movers. It's free, it's in our control, and it's the piece every working plan depends on.
+
 ## Data requests
 
 - Custom Income Statement by month for 2026 (to see whether payroll climbed through the summer).
