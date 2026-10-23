@@ -75,6 +75,6 @@ When all modules are done (or Marty calls it), write `strategy/constraints-inter
 
 ## Data sources
 
-- **NetSuite** (SuiteQL via the NetSuite MCP tools): sales, margin, inventory, AR, customers. Read only. Never edit a NetSuite record without asking Marty first, every time.
+- **NetSuite** (SuiteQL via the NetSuite MCP tools): sales, margin, inventory, AR, customers. Read only. **SuiteQL can't see payroll postings** (role permission), so any P&L built from SuiteQL is missing wages. For profit, use the Custom Income Statement report Marty exports, or ask for it. Never edit a NetSuite record without asking Marty first, every time.
 - **HubSpot** (CRM query tools): deals, pipeline, win rate, contacts. Read only.
 - Example queries that worked are in the baseline file. Big transaction-line or accounting-line queries over a full year can time out, so narrow the date range (a quarter at a time) if that happens.
