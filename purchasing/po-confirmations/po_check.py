@@ -120,6 +120,19 @@ def resolve_ship_method(text, config):
     return best[0] if best else None
 
 
+CARRIERS = {"UPS": "UPS", "FEDEX": "FEDEX", "FDX": "FEDEX", "DHL": "DHL"}
+
+
+def carrier_only(text):
+    """Carrier named with no service, like 'UPS Collect' or 'FedEx prepaid'. Returns the carrier or None."""
+    words = re.findall(r"[A-Z0-9]+", str(text or "").upper())
+    if not words or words[0] not in CARRIERS:
+        return None
+    if all(w in CARRIERS or w in {"COLLECT", "COLL", "PREPAID", "PPD", "ACCT", "ACCOUNT", "3RD", "PARTY", "THIRD", "BILL", "RECIPIENT"} for w in words):
+        return CARRIERS[words[0]]
+    return None
+
+
 def transit_days(ship_method, vendor_id, config):
     override = config.get("vendor_overrides", {}).get(str(vendor_id), {})
     by_vendor = override.get("transit_days", {})
@@ -202,6 +215,11 @@ def check(po, conf, config, today=None):
     # Ship method
     po_ship = po.get("ship_method")
     conf_ship = resolve_ship_method(conf.get("ship_via"), config)
+    carrier = carrier_only(conf.get("ship_via"))
+    if conf.get("ship_via") and not conf_ship and carrier and po_ship and norm(po_ship).startswith(carrier):
+        # "UPS Collect", "FedEx Prepaid": names the carrier and who pays, not the service. Same carrier as the PO is fine.
+        changes.append(f"Vendor only said \"{conf.get('ship_via')}\" for shipping. PO says {po_ship}.")
+        conf_ship = po_ship
     if conf.get("ship_via") and not conf_ship:
         problems.append(f"Couldn't tell what ship method \"{conf.get('ship_via')}\" is. PO says {po_ship or 'nothing'}.")
     elif conf_ship and po_ship and conf_ship != po_ship:

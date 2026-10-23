@@ -110,6 +110,20 @@ class Rules(unittest.TestCase):
         self.assertEqual(r["verdict"], "mismatch")
         self.assertIn("Ship method", r["problems"][0])
 
+    def test_carrier_only_matches_same_carrier(self):
+        # Hallite PO 35255 said "UPS Collect"; PO was UPS Ground
+        self.po["ship_method"] = "UPS® Ground"
+        self.conf["ship_via"] = "UPS Collect"
+        for l in self.conf["lines"]:
+            l["date"] = "10/16/26"
+        r = run(self.data)
+        self.assertNotEqual(r["verdict"], "mismatch")
+        self.assertTrue(any("UPS Collect" in c for c in r["changes"]))
+
+    def test_carrier_only_other_carrier_still_mismatch(self):
+        self.conf["ship_via"] = "UPS Collect"   # PO is FedEx Priority Overnight
+        self.assertEqual(run(self.data)["verdict"], "mismatch")
+
     def test_unknown_ship_method(self):
         self.conf["ship_via"] = "ZZTOP"
         r = run(self.data)
