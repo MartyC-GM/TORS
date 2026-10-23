@@ -4,10 +4,10 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 
 ## Where we left off
 
-- **Status:** In progress
-- **Next module:** Module 0 wrap-up (questions 0.2 to 0.7), then Module 1, Demand
-- **Next question:** 0.2 "Where did $10M, $20M, $50M come from?"
-- **Follow-ups owed:** Build the Jan 1 cash plan (Track 1). Bookkeeper items: payroll tax liabilities, AP vs. AP schedule mismatch, GM Financial and Ally account types. Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
+- **Status:** In progress (paused 10/23/2026)
+- **Next module:** Module 1, Demand (nearly done), then Module 2, Sales Process
+- **Next question:** "When a customer says 'I need it sooner,' what can we actually do (air freight, pull from another order, partial ship, substitute), and who decides?"
+- **Follow-ups owed:** Late-order notice setup (Slack reminder to Marty Sun 10/25 8 AM). Add NetSuite and Slack connectors to the morning assignment scheduled task. House-account backlog (1,411 customers) parked. Bookkeeping fixes. PO 35258 decision (roll back or ask Darion about the $400 lines).
 - **Baseline in use:** `baseline-2026-10.md`
 
 ## Progress
