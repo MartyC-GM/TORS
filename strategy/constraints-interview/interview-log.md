@@ -6,7 +6,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 
 - **Status:** In progress (paused 10/23/2026)
 - **Next module:** Module 1, Demand (nearly done), then Module 2, Sales Process
-- **Next question:** "When a customer says 'I need it sooner,' what can we actually do (air freight, pull from another order, partial ship, substitute), and who decides?"
+- **Next question:** "Who decides whether we pay to expedite or the customer does, and how much can a rep approve on their own?"
 - **Follow-ups owed:** Late-order notice setup (Slack reminder to Marty Sun 10/25 8 AM). Add NetSuite and Slack connectors to the morning assignment scheduled task. House-account backlog (1,411 customers) parked. Bookkeeping fixes. PO 35258 decision (roll back or ask Darion about the $400 lines).
 - **Baseline in use:** `baseline-2026-10.md`
 
@@ -173,6 +173,9 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
   - Read: about 1 in 4 bigger orders waits more than 5 days (backorders, special orders, buyouts). That's where expediting and keeping the customer posted matter most, and where a first-timer decides whether to come back. Next: who tells the customer when an order runs late, and how fast?
 - **1.8b Who tells the customer?** "We have typically been sending an order update, but we don't ask the customer if it's okay. We don't ask them if it's expediting. We don't even make sure they got the email. Customer service sends it out, but they don't notify the salesperson responsible either." (Known, Marty's account)
   - Read: the delay message goes one way, nobody confirms it landed, nobody asks "does this date work or do you need it sooner?", and the account owner never hears about it. So the person who owns the relationship finds out when the customer is already upset, or never. Fix ideas: (1) add "your customers' late orders" to each owner's morning Slack list; (2) change the order status email to ask "Does this date work, or do you need it sooner?" with a reply that goes to the owner; (3) owner calls on any late order over $1,000 or any first-time buyer.
+
+- **1.8c What can we do when they need it sooner?** "We have an expedite option or a substitution, always. Just cost money." (Believed)
+  - Read: speed is always possible; the question is who pays and who decides. Without a rule, the rep either won't offer it or has to ask Marty every time. Idea: a simple expedite rule (when TORS eats the cost, when the customer pays, dollar limit a rep can approve on their own).
 
 ## Data requests
 
