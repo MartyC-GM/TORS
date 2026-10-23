@@ -1,0 +1,427 @@
+<style>
+.sc { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
+.sc-head { display: grid; gap: var(--cds-gap-xs); }
+.sc-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.sc-take { margin: 0; font-size: var(--cds-font-size-body); max-width: 70ch; }
+.sc-goal { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); max-width: 75ch; }
+.sc-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.sc-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; min-width: 0; }
+.sc-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sc-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.15; min-height: 1.15em; }
+.sc-tile-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.sc-pill { display: inline-block; font-size: var(--cds-font-size-caption); padding: 0 var(--cds-pad-xs); border-radius: 999px; border: 1px solid currentColor; justify-self: start; }
+.sc-pill:empty { display: none; }
+.sc-ok { color: var(--color-ok); } .sc-warn { color: var(--color-warn); } .sc-bad { color: var(--color-bad); }
+.sc-sec { display: grid; gap: var(--cds-gap-md); }
+.sc-sec-h { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.sc-sec-h span { color: var(--color-fg-muted); font-weight: 400; }
+.sc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.sc-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.sc-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.sc-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sc-chart { position: relative; min-height: 220px; }
+.sc-chart svg text { fill: var(--color-fg-muted); font-size: 11px; font-family: var(--font-anthropic-sans); }
+.sc-chart .tl { fill: var(--color-fg); }
+.sc-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
+.sc-tip .d { color: var(--cds-text-secondary); }
+.sc-sw { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .3rem; vertical-align: baseline; }
+.sc-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sc-stats { display: flex; flex-wrap: wrap; gap: var(--cds-gap-lg); }
+.sc-stat { display: grid; gap: 2px; }
+.sc-stat b { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-heading); font-variant-numeric: tabular-nums; }
+.sc-stat span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sc-tablebox { max-height: 22rem; overflow: auto; }
+.sc-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.sc-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.sc-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.sc-table .num { text-align: right; }
+.sc-bar { height: .5rem; border-radius: 999px; background: var(--cds-chart-muted); min-width: 2px; }
+.sc-manual { margin: 0; padding-left: 1.1rem; display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-body); }
+.sc-fail { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: inherit; height: 100%; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sc-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="sc">
+  <header class="sc-head">
+    <h1 class="sc-title" id="top">TORS Get-Whole Scorecard</h1>
+    <p class="sc-take" id="take">Last full week's sales were <b class="dash-skeleton" data-source="sales_status" data-field="last_sales" data-row="0">—</b>, <b class="dash-skeleton" data-source="sales_status" data-field="last_gap" data-row="0">—</b> against the $97K weekly target. Bills more than 15 days late: <b class="dash-skeleton" data-source="ap_status" data-field="over15" data-row="0">—</b>.</p>
+    <p class="sc-goal">Goal: be whole by February 1. That means $97K a week in sales, no bill more than 15 days past due, payroll first, no new stock buys except against a customer order, and TORS cash stays in TORS.</p>
+  </header>
+
+  <section class="sc-tiles" id="tiles">
+    <div class="sc-tile">
+      <span class="sc-tile-label">This week so far</span>
+      <span class="sc-big dash-skeleton" id="t-cur" data-source="sales_status" data-field="cur_sales" data-row="0">—</span>
+      <span class="sc-tile-note">Target $97K a week</span>
+    </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">Last full week</span>
+      <span class="sc-big dash-skeleton" id="t-last" data-source="sales_status" data-field="last_sales" data-row="0">—</span>
+      <span class="sc-pill" id="p-last"></span>
+    </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">Cash in the bank</span>
+      <span class="sc-big dash-skeleton" id="t-cash" data-source="cash_cards" data-field="cash" data-row="0">—</span>
+      <span class="sc-tile-note">As booked in NetSuite. Floor $40K</span>
+      <span class="sc-pill" id="p-cash"></span>
+    </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">Bills more than 15 days late</span>
+      <span class="sc-big dash-skeleton" id="t-over15" data-source="ap_status" data-field="over15" data-row="0">—</span>
+      <span class="sc-tile-note">Target $0</span>
+      <span class="sc-pill" id="p-over15"></span>
+    </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">Open POs not yet received</span>
+      <span class="sc-big dash-skeleton" id="t-po" data-source="open_po_total" data-field="total" data-row="0">—</span>
+      <span class="sc-tile-note">Becomes bills when it lands. Push out what we don't need yet</span>
+    </div>
+    <div class="sc-tile">
+      <span class="sc-tile-label">Credit cards owed</span>
+      <span class="sc-big dash-skeleton" id="t-cards" data-source="cash_cards" data-field="cards" data-row="0">—</span>
+      <span class="sc-tile-note">MC and Amex</span>
+    </div>
+  </section>
+
+  <section class="sc-sec" id="sales">
+    <h2 class="sc-sec-h">Sales <span>· Daro</span></h2>
+    <div class="sc-grid">
+      <div class="sc-card">
+        <h3 id="sales-chart-h">Sales by week</h3>
+        <p class="sc-note">Invoices and cash sales, less credits. Dashed line is the $97K target. The lighter bar is the week in progress.</p>
+        <div class="sc-chart dash-skeleton" id="sales-chart" data-source="sales_weekly"></div>
+        <div class="sc-stats" id="plan-stats">
+          <div class="sc-stat"><b class="dash-skeleton" data-source="sales_status" data-field="plan_sales" data-row="0">—</b><span>Sold since Oct 26</span></div>
+          <div class="sc-stat"><b class="dash-skeleton" data-source="sales_status" data-field="plan_target" data-row="0">—</b><span>Target since Oct 26</span></div>
+          <div class="sc-stat"><b class="dash-skeleton" id="plan-gap" data-source="sales_status" data-field="plan_gap" data-row="0">—</b><span>Ahead or behind</span></div>
+        </div>
+      </div>
+      <div class="sc-card">
+        <h3 id="quotes-chart-h">Quotes sent by week</h3>
+        <p class="sc-note">NetSuite estimates. Hover a week for won, lost, still open, and the win rate on decided quotes. Target: answer every quote within 24 hours, win 50% or better.</p>
+        <div class="sc-chart dash-skeleton" id="quotes-chart" data-source="quotes_weekly"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sc-sec" id="purchasing">
+    <h2 class="sc-sec-h">Purchasing and inventory <span>· Darion</span></h2>
+    <div class="sc-grid">
+      <div class="sc-card">
+        <h3 id="pos-chart-h">Purchase orders written by week</h3>
+        <p class="sc-note">All POs, including buy-to-order. From Oct 26 on, new stock buys should be $0. Only orders backed by a customer order.</p>
+        <div class="sc-chart dash-skeleton" id="pos-chart" data-source="pos_weekly"></div>
+      </div>
+      <div class="sc-card">
+        <h3 id="openpo-h">Open POs by vendor</h3>
+        <p class="sc-note">Dollars ordered but not received yet. Keep what fills a backorder or real stockout, push the rest past January.</p>
+        <div class="sc-tablebox">
+          <table class="sc-table" id="openpo-table" data-source="open_pos_vendor" data-row-key="vendor">
+            <thead><tr><th data-field="vendor">Vendor</th><th data-field="pos" class="num">POs</th><th data-field="open_value" class="num">Not received</th><th aria-hidden="true"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="sc-tiles">
+      <div class="sc-tile">
+        <span class="sc-tile-label">Items on backorder</span>
+        <span class="sc-big dash-skeleton" data-source="backorders" data-field="items_backordered" data-row="0">—</span>
+        <span class="sc-tile-note">Main warehouse. Should go down every week</span>
+      </div>
+      <div class="sc-tile">
+        <span class="sc-tile-label">Stock with no sales in 12 months</span>
+        <span class="sc-big dash-skeleton" data-source="dead_stock" data-field="dead_value" data-row="0">—</span>
+        <span class="sc-tile-note"><span class="dash-skeleton" data-source="dead_stock" data-field="dead_skus" data-row="0">—</span> SKUs. Goal: $40K back as cash by Jan 31</span>
+      </div>
+      <div class="sc-tile">
+        <span class="sc-tile-label">Total inventory on hand</span>
+        <span class="sc-big dash-skeleton" data-source="dead_stock" data-field="total_value" data-row="0">—</span>
+        <span class="sc-tile-note">At cost</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sc-sec" id="operations">
+    <h2 class="sc-sec-h">Operations and shipping</h2>
+    <div class="sc-grid">
+      <div class="sc-card">
+        <h3 id="freight-chart-h">Freight billed vs. freight cost</h3>
+        <p class="sc-note">What we charge customers for shipping against what carriers charge us, including fuel surcharges. Cost should stay at or under billed.</p>
+        <div class="sc-legend"><span><i class="sc-sw" id="sw-billed"></i>Billed to customers</span><span><i class="sc-sw" id="sw-cost"></i>Carrier cost</span></div>
+        <div class="sc-chart dash-skeleton" id="freight-chart" data-source="costs_weekly"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sc-sec" id="admin">
+    <h2 class="sc-sec-h">Administration and cash <span>· Marty</span></h2>
+    <div class="sc-tiles">
+      <div class="sc-tile">
+        <span class="sc-tile-label">Open vendor bills</span>
+        <span class="sc-big dash-skeleton" data-source="ap_status" data-field="open_ap" data-row="0">—</span>
+        <span class="sc-tile-note"><span class="dash-skeleton" data-source="ap_status" data-field="open_bills" data-row="0">—</span> bills</span>
+      </div>
+      <div class="sc-tile">
+        <span class="sc-tile-label">Past due (any amount of days)</span>
+        <span class="sc-big dash-skeleton" data-source="ap_status" data-field="past_due" data-row="0">—</span>
+        <span class="sc-tile-note">Fine if under 15 days. Over 15 is the line</span>
+      </div>
+    </div>
+    <div class="sc-grid">
+      <div class="sc-card">
+        <h3 id="late-chart-h">Late fees, penalties and interest by week</h3>
+        <p class="sc-note">Account 71920. Target $0. This is money lost to paying late.</p>
+        <div class="sc-chart dash-skeleton" id="late-chart" data-source="costs_weekly"></div>
+      </div>
+      <div class="sc-card">
+        <h3 id="soft-chart-h">Software spend by week</h3>
+        <p class="sc-note">Account 66910. Goal: cut about $4K a month from what we were paying.</p>
+        <div class="sc-chart dash-skeleton" id="soft-chart" data-source="costs_weekly"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sc-sec" id="manual">
+    <h2 class="sc-sec-h">Tracked by hand for now</h2>
+    <div class="sc-card">
+      <p class="sc-note">These are on the weekly scorecard but aren't in NetSuite yet. Bring them to the Monday meeting.</p>
+      <ul class="sc-manual">
+        <li>Top-account calls made (target 15 a week until all 66 are done) · Daro</li>
+        <li>Win-back contacts to quiet customers (target 25 a week) · Daro</li>
+        <li>HubSpot pipeline follow-ups on deals over $1,000 · Daro</li>
+        <li>Orders shipped same day (target 95% or better) · Operations</li>
+        <li>Dead stock cash recovered, running total (target $40K by Jan 31) · Darion</li>
+        <li>Marketing emails sent (target 2 a month) and orders traced to them · Marketing</li>
+        <li>Bookkeeping fixes done (payroll taxes, AP reconcile, loan accounts, monthly P&amp;L) · Marty</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('sales_status', {
+  title: 'Sales vs. $97K target',
+  description: 'Last full week and the week in progress, plus totals since the plan started on Oct 26 against $97K a week.',
+  inputs: ['sales_weekly'],
+  fn: (sales_weekly) => {
+    const rows = sales_weekly.map(r => ({ week: String(r.week), sales: Number(r.sales), current: Number(r.is_current) }));
+    const full = rows.filter(r => r.current === 0);
+    const cur = rows.find(r => r.current === 1);
+    const last = full[full.length - 1];
+    const plan = full.filter(r => r.week >= '2026-10-26');
+    const planSales = plan.reduce((s, r) => s + r.sales, 0);
+    return [{
+      last_week: last ? last.week : null,
+      last_sales: last ? last.sales : null,
+      last_gap: last ? last.sales - 97000 : null,
+      cur_week: cur ? cur.week : null,
+      cur_sales: cur ? cur.sales : 0,
+      plan_weeks: plan.length,
+      plan_sales: planSales,
+      plan_target: plan.length * 97000,
+      plan_gap: planSales - plan.length * 97000
+    }];
+  }
+});
+
+dash.calc('open_po_total', {
+  title: 'Open PO dollars, all vendors',
+  description: 'Sum of what is ordered but not yet received across every vendor.',
+  inputs: ['open_pos_vendor'],
+  fn: (open_pos_vendor) => [{
+    total: open_pos_vendor.reduce((s, r) => s + Number(r.open_value), 0),
+    pos: open_pos_vendor.reduce((s, r) => s + Number(r.pos), 0)
+  }]
+});
+</script>
+
+<script>
+(function () {
+  const money = d3.format('$,.0f');
+  const compact = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 });
+  const big = v => Math.abs(v) >= 10000 ? compact.format(v) : money(v);
+  const signed = v => (v >= 0 ? '+' : '-') + big(Math.abs(v));
+  const count = d3.format(',');
+  const pct = d3.format('.0%');
+  const parseDay = d3.utcParse('%Y-%m-%d');
+  const dayFmt = d3.utcFormat('%b %-d');
+  const TARGET = 97000;
+
+  const marks = sel => Array.from(document.querySelectorAll(sel));
+  const setPill = (id, text, cls) => { const p = document.getElementById(id); p.className = 'sc-pill ' + (cls || ''); p.textContent = text || ''; };
+
+  function fillMarks(id, fmtByField) {
+    const d = dash.data(id);
+    marks('[data-source="' + id + '"][data-field]').forEach(el => {
+      if (el.tagName === 'TH') return;
+      if (d.status !== 'ok') { if (d.status === 'loading') el.classList.add('dash-skeleton'); else { el.classList.remove('dash-skeleton'); el.textContent = '—'; } return; }
+      el.classList.remove('dash-skeleton');
+      const rowIdx = Number(el.getAttribute('data-row') || 0);
+      const row = d.data[rowIdx];
+      const f = el.getAttribute('data-field');
+      if (!row || row[f] === null || row[f] === undefined) { el.textContent = '—'; return; }
+      const fmt = (fmtByField && fmtByField[f]) || money;
+      el.textContent = fmt(Number(row[f]));
+    });
+  }
+
+  function chartState(el, st) {
+    if (st === 'ok') { el.classList.remove('dash-skeleton'); return true; }
+    el.innerHTML = '';
+    if (st === 'loading') { el.classList.add('dash-skeleton'); return false; }
+    el.classList.remove('dash-skeleton');
+    const f = document.createElement('div'); f.className = 'sc-fail'; f.textContent = 'Failed to load'; el.appendChild(f);
+    return false;
+  }
+
+  function bars(el, rows, cfg) {
+    el.innerHTML = '';
+    if (!rows.length) return;
+    const W = Math.max(280, el.clientWidth || 600), H = 220, mt = 14, mb = 24, mr = 8;
+    const fmtY = cfg.fmtY || big;
+    const maxV = d3.max(rows, r => d3.max(cfg.series, s => Number(r[s.key]) || 0)) || 0;
+    const y = d3.scaleLinear([0, Math.max(maxV, cfg.target || 0) * 1.08 || 1], [H - mb, mt]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const ticks = y.ticks(4);
+    const probe = svg.append('g');
+    ticks.forEach(t => probe.append('text').text(fmtY(t)));
+    const lw = d3.max(probe.selectAll('text').nodes(), n => n.getComputedTextLength()) || 30;
+    probe.remove();
+    const ml = Math.ceil(lw) + 10;
+    const x = d3.scaleBand(rows.map(r => r.week), [ml, W - mr]).padding(0.25);
+    const xi = d3.scaleBand(cfg.series.map(s => s.key), [0, x.bandwidth()]).padding(cfg.series.length > 1 ? 0.12 : 0);
+    const g = svg.append('g');
+    g.selectAll('line.grid').data(ticks).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', d => y(d)).attr('y2', d => y(d)).attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+    g.selectAll('text.yl').data(ticks).join('text').attr('x', ml - 6).attr('y', d => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end').text(d => fmtY(d));
+    const every = Math.max(1, Math.ceil(rows.length * 48 / (W - ml)));
+    g.selectAll('text.xl').data(rows.filter((r, i) => (rows.length - 1 - i) % every === 0)).join('text')
+      .attr('x', r => x(r.week) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').text(r => dayFmt(parseDay(r.week)));
+    const bw = Math.min(32, xi.bandwidth());
+    cfg.series.forEach(s => {
+      g.selectAll(null).data(rows).join('rect')
+        .attr('x', r => x(r.week) + xi(s.key) + (xi.bandwidth() - bw) / 2)
+        .attr('width', bw)
+        .attr('y', r => y(Math.max(0, Number(r[s.key]) || 0)))
+        .attr('height', r => Math.max(0, y(0) - y(Math.max(0, Number(r[s.key]) || 0))))
+        .attr('rx', 4)
+        .attr('fill', s.color)
+        .attr('fill-opacity', r => (cfg.dim && cfg.dim(r)) ? 0.45 : 1);
+    });
+    g.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    if (cfg.target) {
+      g.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(cfg.target)).attr('y2', y(cfg.target))
+        .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1.5).attr('stroke-dasharray', '5 4');
+      g.append('text').attr('class', 'tl').attr('x', W - mr).attr('y', y(cfg.target) - 5).attr('text-anchor', 'end').text('Target ' + big(cfg.target));
+    }
+    const tip = d3.select(el).append('div').attr('class', 'sc-tip').style('display', 'none');
+    g.selectAll(null).data(rows).join('rect')
+      .attr('x', r => x(r.week) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', mt).attr('height', H - mb - mt)
+      .attr('fill', 'transparent')
+      .on('mouseenter mousemove', (ev, r) => {
+        tip.style('display', null).html('');
+        tip.append('div').attr('class', 'd').text('Week of ' + dayFmt(parseDay(r.week)) + (cfg.dim && cfg.dim(r) ? ' (so far)' : ''));
+        cfg.tip(r).forEach(([label, value, color]) => {
+          const line = tip.append('div');
+          if (color) line.append('i').attr('class', 'sc-sw').style('background', color);
+          line.append('span').text(label + ': ' + value);
+        });
+        const box = el.getBoundingClientRect();
+        const tw = tip.node().offsetWidth;
+        let left = ev.clientX - box.left + 12;
+        if (left + tw > box.width) left = ev.clientX - box.left - tw - 12;
+        tip.style('left', Math.max(0, left) + 'px').style('top', Math.max(0, ev.clientY - box.top - 10) + 'px');
+      })
+      .on('mouseleave', () => tip.style('display', 'none'));
+  }
+
+  dash.onData(() => {
+    const c0 = dash.colors[0], c1 = dash.colors[1];
+    document.getElementById('sw-billed').style.background = c0;
+    document.getElementById('sw-cost').style.background = c1;
+
+    // Headline figures
+    fillMarks('sales_status', { last_gap: signed, plan_gap: signed });
+    fillMarks('cash_cards');
+    fillMarks('ap_status', { open_bills: count });
+    fillMarks('open_po_total');
+    fillMarks('backorders', { items_backordered: count });
+    fillMarks('dead_stock', { dead_skus: count });
+
+    const ss = dash.data('sales_status');
+    if (ss.status === 'ok' && ss.data[0]) {
+      const s = ss.data[0];
+      if (s.last_sales !== null) setPill('p-last', s.last_sales >= TARGET ? 'On target' : 'Under target', s.last_sales >= TARGET ? 'sc-ok' : 'sc-bad');
+      const gapEl = document.getElementById('plan-gap');
+      gapEl.className = s.plan_weeks === 0 ? '' : (s.plan_gap >= 0 ? 'sc-ok' : 'sc-bad');
+      if (s.plan_weeks === 0) gapEl.textContent = 'Starts Oct 26';
+    } else setPill('p-last', '');
+    const cc = dash.data('cash_cards');
+    if (cc.status === 'ok' && cc.data[0]) { const v = Number(cc.data[0].cash); setPill('p-cash', v >= 40000 ? 'Above floor' : (v >= 0 ? 'Below $40K floor' : 'Overdrawn'), v >= 40000 ? 'sc-ok' : (v >= 0 ? 'sc-warn' : 'sc-bad')); } else setPill('p-cash', '');
+    const ap = dash.data('ap_status');
+    if (ap.status === 'ok' && ap.data[0]) { const v = Number(ap.data[0].over15); setPill('p-over15', v <= 0 ? 'On target' : 'Pay these now', v <= 0 ? 'sc-ok' : 'sc-bad'); } else setPill('p-over15', '');
+
+    // Sales chart
+    const sw = dash.data('sales_weekly'), sEl = document.getElementById('sales-chart');
+    if (chartState(sEl, sw.status)) bars(sEl, sw.data, {
+      series: [{ key: 'sales', color: c0 }], target: TARGET,
+      dim: r => Number(r.is_current) === 1,
+      tip: r => [['Sales', money(Number(r.sales))], ['Invoices', count(Number(r.invoices))], ['Vs. target', signed(Number(r.sales) - TARGET)]]
+    });
+
+    // Quotes chart
+    const qw = dash.data('quotes_weekly'), qEl = document.getElementById('quotes-chart');
+    if (chartState(qEl, qw.status)) bars(qEl, qw.data, {
+      series: [{ key: 'quotes', color: c0 }], fmtY: d3.format(','),
+      tip: r => [['Quotes', count(Number(r.quotes))], ['Quoted value', money(Number(r.quote_value))], ['Won', count(Number(r.won))], ['Lost or expired', count(Number(r.lost))], ['Still open', count(Number(r.still_open))], ['Win rate (decided)', r.win_rate === null || r.win_rate === undefined ? 'none decided' : pct(Number(r.win_rate))]]
+    });
+
+    // POs chart
+    const pw = dash.data('pos_weekly'), pEl = document.getElementById('pos-chart');
+    if (chartState(pEl, pw.status)) bars(pEl, pw.data, {
+      series: [{ key: 'po_value', color: c0 }],
+      tip: r => [['PO dollars', money(Number(r.po_value))], ['POs written', count(Number(r.pos))]]
+    });
+
+    // Open PO table
+    const op = dash.data('open_pos_vendor'), tbody = document.querySelector('#openpo-table tbody');
+    tbody.innerHTML = '';
+    if (op.status === 'ok') {
+      const maxV = d3.max(op.data, r => Number(r.open_value)) || 1;
+      op.data.forEach(r => {
+        const tr = document.createElement('tr');
+        const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; tr.appendChild(c); return c; };
+        td(String(r.vendor));
+        td(count(Number(r.pos)), 'num');
+        td(money(Number(r.open_value)), 'num');
+        const bc = td('', ''); bc.style.width = '28%';
+        const b = document.createElement('div'); b.className = 'sc-bar'; b.style.width = (100 * Number(r.open_value) / maxV) + '%'; bc.appendChild(b);
+        tbody.appendChild(tr);
+      });
+    } else if (op.status !== 'loading') {
+      const tr = document.createElement('tr'); const c = document.createElement('td'); c.colSpan = 4; c.className = 'sc-fail'; c.textContent = 'Failed to load'; tr.appendChild(c); tbody.appendChild(tr);
+    }
+
+    // Costs charts
+    const cw = dash.data('costs_weekly');
+    const fEl = document.getElementById('freight-chart'), lEl = document.getElementById('late-chart'), sfEl = document.getElementById('soft-chart');
+    if (chartState(fEl, cw.status)) bars(fEl, cw.data, {
+      series: [{ key: 'freight_billed', color: c0 }, { key: 'freight_cost', color: c1 }],
+      tip: r => [['Billed', money(Number(r.freight_billed)), c0], ['Cost', money(Number(r.freight_cost)), c1], ['Cost vs. billed', Number(r.freight_billed) > 0 ? pct(Number(r.freight_cost) / Number(r.freight_billed)) : 'none billed']]
+    });
+    if (chartState(lEl, cw.status)) bars(lEl, cw.data, {
+      series: [{ key: 'late_fees', color: 'var(--cds-chart-status-critical)' }],
+      tip: r => [['Late fees and interest', money(Number(r.late_fees))]]
+    });
+    if (chartState(sfEl, cw.status)) bars(sfEl, cw.data, {
+      series: [{ key: 'software', color: c0 }],
+      tip: r => [['Software', money(Number(r.software))]]
+    });
+  });
+
+  const named = document.getElementById(location.hash.slice(1));
+  if (named) named.scrollIntoView();
+})();
+</script>
