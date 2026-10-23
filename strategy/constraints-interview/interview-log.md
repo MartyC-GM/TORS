@@ -15,7 +15,7 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 | Module | Status | Date |
 |---|---|---|
 | 0. The Goals Themselves | In progress | 2026-10-23 |
-| 1. Demand | Not started | |
+| 1. Demand | In progress | 2026-10-23 |
 | 2. Sales Process and Capacity | Not started | |
 | 3. Inventory and Supply | Not started | |
 | 4. Capital and Cash | Not started | |
@@ -148,6 +148,12 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 - **Working answer on the constraint (10/23, before Modules 1 to 8):** the constraint is **demand**, meaning not enough of the right customers ordering, especially mid-size accounts. Doubling test: doubling inventory wouldn't double sales ($903K already sits in items with over a year of supply). Doubling staff wouldn't either (we're built for more than we sell). Doubling demand would, since the shelves and crew can handle it. Evidence: new customers flat at about 850 a month for two years, 15,500 customers but only 66 over $10K a year, $175 average invoice, quote win rate is fine, sales come in on their own (web and inbound) with no outbound engine. Made worse by a **policy constraint**: no rules on cash (Groundwork, early debt payoff) and buying ahead of demand (1.4 turns, $291K open POs, PO run lines raised to $400). The capital squeeze is a symptom, not the root. Modules 1 and 2 test this.
 
 - **Over-a-year-supply report** (10/23, `strategy/cash-plan/TORS_Over_1_Year_Supply.xlsx`): 6,475 items that sold in the last 12 months but have more on hand than a year of sales, about $909K at cost. $427K of it is 10+ years of supply. 1,798 of these items (about $303K on hand) were bought again in the last 12 months, and on 1,659 of them the last PO was for more than a full year of sales. Biggest by last-PO vendor: Freudenberg $195K, Tuico $131K, GE MAO $107K, no PO on file $105K, Seal and Rubber Tech $90K. Read: the buying process orders big lots (minimums, price breaks, line minimums) well past what sells. Policy constraint, confirmed with data.
+
+### Module 1: Demand (2026-10-23)
+
+- **1.7 Who should we have 10x more of?** "OEMs. Original equipment manufacturers." (Believed)
+  - **Checked in NetSuite:** only 66 customers are tagged OEM, $161K in the last 12 months (about 3% of sales). But **14,254 of 15,500 customers (about $3.43M, 67% of sales) have no category at all.** Many top accounts look like OEMs (Cabka, Acorn Engineering, Dwyer, PolyJohn, Air Squared, Radium, Penske Racing Shocks, Rugged Suppressors) but aren't tagged. (Known)
+  - Read: we can't see how many OEMs we have, so we can't aim at them or measure growth. Tagging customers by type is a cheap admin fix that serves the sales constraint.
 
 ## Data requests
 
