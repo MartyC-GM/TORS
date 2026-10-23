@@ -5,9 +5,9 @@ This is the saved state for the Constraints Interview. The `first-principles` sk
 ## Where we left off
 
 - **Status:** In progress
-- **Next module:** Module 0, The Goals Themselves
-- **Next question:** 0.1 "When you say $10 million this year, what does hitting it give you?"
-- **Follow-ups owed:** Groundwork loan: terms, repayment, what it's for. Was paying off PayPal Capital and P1FCU early a choice? Bookkeeper items: payroll tax liabilities, AP vs. AP schedule mismatch, GM Financial and Ally account types. Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
+- **Next module:** Module 0 wrap-up (questions 0.2 to 0.7), then Module 1, Demand
+- **Next question:** 0.2 "Where did $10M, $20M, $50M come from?"
+- **Follow-ups owed:** Build the Jan 1 cash plan (Track 1). Bookkeeper items: payroll tax liabilities, AP vs. AP schedule mismatch, GM Financial and Ally account types. Why gross margin % slid from 66% to 60%. Software spend line by line. Monthly payroll trend (run the income statement by month). Where did the cash go? (inventory buys, expenses outside NetSuite, owner draws, debt payments). Bookkeeping fixes for the GM Financial and Ally loan accounts.
 - **Baseline in use:** `baseline-2026-10.md`
 
 ## Progress
@@ -127,8 +127,12 @@ _(Add by module. Short, Marty's words where possible. Tag each: Known / Believed
 
 _(Anything we decide along the way, with the date.)_
 
+- **2026-10-23: No more TORS money goes to Groundwork.** Marty expects the $293K already out to be a straight loss. Handle the Groundwork loan as its own project (CPA on write-off and tax treatment).
+- **2026-10-23: Two tracks from here.** Track 1 is a 10-week cash plan to get even by Jan 1 (about $165K gap). Track 2 is to keep going with the interview (Module 1, Demand) to find the growth constraint.
+
 ## Session history
 
 | Date | Modules covered | Notes |
 |---|---|---|
 | 2026-10-23 | Setup | Built skill, pulled baseline from NetSuite and HubSpot |
+| 2026-10-23 | Module 0 (0.1) | AP schedule, income statement, balance sheets. Found the cash went to debt payoff, Groundwork, inventory, equipment. Decided: no more money to Groundwork, two-track plan. |
